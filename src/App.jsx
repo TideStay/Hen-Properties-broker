@@ -208,40 +208,74 @@ export default function App() {
  
 
       {/* Expertise Section */}
-      <section id="expertise" className="py-24 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl font-serif text-stone-900 mb-6">End-to-End Solutions</h2>
-            <p className="text-stone-600 text-lg">Managing the full spectrum of conscious residential development, both on-grid and off-grid.</p>
+
+      <section id="expertise" className="py-32 bg-stone-50 relative overflow-hidden">
+
+        {/* Subtle background decoration for depth */}
+
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-900/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-700 mb-4">Our Expertise</h2>
+            <h3 className="text-4xl lg:text-5xl font-serif text-stone-900 mb-6">End-to-End Solutions</h3>
+            <div className="w-16 h-px bg-emerald-700/30 mx-auto mb-6"></div>
+            <p className="text-stone-600 text-lg leading-relaxed">
+              Managing the full spectrum of conscious residential development, both on-grid and off-grid.
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 hover:shadow-md transition">
-              <div className="w-14 h-14 bg-stone-100 text-emerald-700 rounded-2xl flex items-center justify-center mb-6">
-                <Droplets size={28} />
+          {/* Staggered Grid Layout */}
+          <div className="grid md:grid-cols-3 gap-8 items-start">
+            
+            {/* Card 1 - Land & Water */}
+            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#6A8A94]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#6A8A94]/5 hover:-translate-y-2 mt-0 md:mt-0">
+
+              {/* Earth & Ocean Colors: Sand background + Muted Ocean Blue icon */}
+              <div className="w-16 h-16 rounded-full bg-[#F3EFEA] text-[#6A8A94] flex items-center justify-center mb-8 transition-all duration-500 border border-[#E8E2D9] group-hover:bg-[#EAE4DB] group-hover:border-[#DED6C8] group-hover:text-[#52707A]">
+                <Droplets size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-              <h4 className="text-xl font-bold text-stone-900 mb-3">Land & Water Infrastructure</h4>
-              <p className="text-stone-600 leading-relaxed">Acting as your property broker. Finding water, managing well perforations, and navigating complex permits and registration processes seamlessly.</p>
+
+              <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Land & Water Infrastructure</h4>
+              <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
+                Acting as your property broker. Finding water, managing well perforations, and navigating complex permits and registration processes seamlessly.
+              </p>
             </div>
             
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 hover:shadow-md transition">
-              <div className="w-14 h-14 bg-stone-100 text-emerald-700 rounded-2xl flex items-center justify-center mb-6">
-                <Sun size={28} />
+            {/* Card 2 - Solar - Staggered slightly down */}
+            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#C49B55]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#C49B55]/5 hover:-translate-y-2 mt-0 md:mt-12">
+
+              {/* Solar Colors: Soft Sun background + Muted Gold icon */}
+              <div className="w-16 h-16 rounded-full bg-[#FCF7E8] text-[#C49B55] flex items-center justify-center mb-8 transition-all duration-500 border border-[#F2EBD1] group-hover:bg-[#F5ECD5] group-hover:border-[#E8DAB9] group-hover:text-[#A88344]">
+                <Sun size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-              <h4 className="text-xl font-bold text-stone-900 mb-3">Off-Grid & Solar Systems</h4>
-              <p className="text-stone-600 leading-relaxed">Design and installment of solar pumps for water systems and underground electricity, creating fully independent, sustainable properties.</p>
+
+              <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Off-Grid & Solar Systems</h4>
+              <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
+                Design and installment of solar pumps for water systems and underground electricity, creating fully independent, sustainable properties.
+              </p>
             </div>
             
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 hover:shadow-md transition">
-              <div className="w-14 h-14 bg-stone-100 text-emerald-700 rounded-2xl flex items-center justify-center mb-6">
-                <Home size={28} />
+            {/* Card 3 - Build & Furnish */}
+            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#857061]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#857061]/5 hover:-translate-y-2 mt-0 md:mt-0">
+
+              {/* Architecture Colors: Concrete background + Walnut Wood icon */}
+              <div className="w-16 h-16 rounded-full bg-[#EAEAEA] text-[#857061] flex items-center justify-center mb-8 transition-all duration-500 border border-[#DCDCDC] group-hover:bg-[#DCDCDC] group-hover:border-[#CFCFCF] group-hover:text-[#6B5A4D]">
+                <Home size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-              <h4 className="text-xl font-bold text-stone-900 mb-3">Design, Build & Furnish</h4>
-              <p className="text-stone-600 leading-relaxed">Acting as the general contractor. Designing homes, restaurants, pools, and studios. Crafting custom wood and metal furniture for a Turn-Key finish.</p>
+
+              <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Design, Build & Furnish</h4>
+              <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
+                Acting as the general contractor. Designing homes, restaurants, pools, and studios. Crafting custom wood and metal furniture for a Turn-Key finish.
+              </p>
             </div>
+            
           </div>
         </div>
+
       </section>
+ 
+ 
 
       {/* Case Studies Section */}
       <section id="projects" className="py-24 bg-stone-100">
