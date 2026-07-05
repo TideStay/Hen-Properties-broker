@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Leaf, Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, ShieldCheck } from 'lucide-react';
 
 export default function App() {
+  // BUGFIX: missing state definition for process wheel
+  const [activeStep, setActiveStep] = useState(1);
+
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-emerald-200">
       
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="text-2xl font-serif font-bold text-stone-900 tracking-tight">
-            Conscious<span className="text-emerald-700">Dev</span>
+          <div className="text-2xl font-serif font-bold text-stone-900 tracking-tight leading-tight">
+            San Juanillo<br />
+            <span className="text-emerald-700">Properties</span>
           </div>
+     
           <div className="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
             <a href="#expertise" className="hover:text-emerald-700 transition">Our Expertise</a>
             <a href="#philosophy" className="hover:text-emerald-700 transition">Philosophy</a>
@@ -22,17 +27,19 @@ export default function App() {
           </a>
         </div>
       </nav>
+ 
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
               From Raw Land to <br className="hidden md:block" />
               <span className="text-emerald-700 italic">Off-Grid Luxury.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
-              Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
+              Holistic property development and conscious living by Hen Azenkot.  
+              We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
             </p>
             <div className="flex flex-wrap gap-4">
               <a href="#projects" className="bg-emerald-800 text-white px-8 py-4 rounded-full font-medium hover:bg-emerald-700 transition flex items-center gap-2">
@@ -41,23 +48,46 @@ export default function App() {
             </div>
           </div>
         </div>
-        
-        {/* Placeholder for the circular pool ocean view image */}
-        <div className="mt-16 lg:mt-24 w-full h-[50vh] lg:h-[70vh] relative px-4 lg:px-8">
-          {/* TO DO in Cursor: Replace src with "/assets/WhatsApp Image 2026-06-24 at 22.17.06.jpeg" or similar */}
-          <img 
-            src="https://placehold.co/1920x1080/292524/e7e5e4?text=Circular+Pool+%26+Ocean+View+Image" 
-            alt="Circular pool overlooking the jungle and ocean" 
-            className="w-full h-full object-cover rounded-3xl lg:rounded-[4rem] shadow-2xl"
+      </section>
+   
+      {/* Image Gallery Section - Removed syntax errors */}
+      <div className="mt-16 lg:mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+        {/* Image 1: The core view */}
+        <div className="md:col-span-2 aspect-[16/10] rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/assets/WhatsApp Image 2026-06-24 at 21.46.02 (2).jpeg"
+            alt="Circular pool overlooking jungle and ocean view"
+            className="w-full h-full object-cover"
           />
         </div>
-      </section>
 
+        {/* Image 2: Interior detail */}
+        <div className="aspect-[16/10] md:aspect-square rounded-3xl overflow-hidden shadow-xl">
+          <img
+            src="/assets/בית2.jpeg"
+            alt="Beautifully crafted off-grid interior"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Image 3: The pathway/terrain */}
+        <div className="md:col-span-3 aspect-[21/9] rounded-3xl overflow-hidden shadow-xl mt-6">
+          <img
+            src="/assets/WhatsApp Image 2026-06-24 at 21.46.05 (2).jpeg"
+            alt="Natural stone pathway leading to the property"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+  
+  
       {/* Philosophy & Experience Section */}
-      <section id="philosophy" className="py-24 bg-stone-900 text-stone-100">
+      <section id="philosophy" className="py-24 bg-stone-900 text-stone-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            
+            {/* Left Column: Text Content */}
+            <div className="z-10">
               <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-400 mb-4">20 Years of Mastery</h2>
               <h3 className="text-4xl lg:text-5xl font-serif leading-tight mb-6">
                 A turn-key approach to holistic development.
@@ -69,14 +99,94 @@ export default function App() {
                 From the foundation and landscape architecture to the purchase of custom furniture and electrodomestics—we deliver a fresh, flowing space ready for you to step into, utilizing holistic methods like Feng Shui.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {/* TO DO in Cursor: Replace with beautiful interior and stone pathway images from your assets */}
-              <img src="https://placehold.co/600x800/1c1917/a8a29e?text=Holistic+Interior" alt="Interior design" className="rounded-2xl h-full object-cover" />
-              <img src="https://placehold.co/600x800/1c1917/a8a29e?text=Stone+Pathway" alt="Stone pathway" className="rounded-2xl h-full object-cover mt-8" />
+
+            {/* Right Column: The Interactive Process Wheel */}
+            <div className="relative flex justify-center items-center min-h-[500px] lg:min-h-[600px]">
+              
+              {/* Mobile View: Simple Grid (Hidden on Desktop) */}
+              <div className="lg:hidden flex flex-col gap-4 w-full">
+                {[
+                  { id: 1, title: "Land & Water", desc: "Acting as your broker to find the perfect parcel, locating water sources, managing well perforations, and handling complex land registration." },
+                  { id: 2, title: "Legal & Permits", desc: "Navigating local regulations seamlessly. We manage all zoning, environmental approvals, and building permits for full legal compliance." },
+                  { id: 3, title: "Eco-Construction", desc: "Acting as the general contractor. Designing and constructing sustainable, off-grid homes, pools, solar grids, and modern infrastructure." },
+                  { id: 4, title: "Interior & Feng Shui", desc: "Crafting custom wood/metal furniture and applying Feng Shui flow to deliver a fully finished, turn-key space ready to live in." }
+                ].map((step) => (
+                  <div key={step.id} className="bg-stone-800/40 border border-stone-700/50 p-6 rounded-2xl">
+                    <div className="text-emerald-400 font-mono text-sm mb-2">Step 0{step.id}</div>
+                    <h4 className="text-xl font-serif text-white mb-2">{step.title}</h4>
+                    <p className="text-stone-400 text-sm leading-relaxed">{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop View: Interactive Wheel (Hidden on Mobile) */}
+              <div className="hidden lg:flex relative w-[500px] h-[500px] items-center justify-center">
+                {/* The Outer Dashed Ring */}
+                <div className="absolute inset-0 rounded-full border border-dashed border-stone-700 animate-[spin_60s_linear_infinite] pointer-events-none"></div>
+                
+                {/* The Static Inner Ring for visual depth */}
+                <div className="absolute inset-10 rounded-full border border-stone-800/50 pointer-events-none"></div>
+
+                {/* The Dynamic Center Content */}
+                <div className="absolute inset-16 bg-stone-900 rounded-full border border-stone-800 shadow-[0_0_50px_rgba(16,185,129,0.05)] flex flex-col items-center justify-center p-12 text-center transition-all duration-500 z-0">
+                  <span className="text-emerald-500/20 text-8xl font-serif absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+                    {activeStep}
+                  </span>
+                  <div className="relative z-10">
+                    <h4 className="text-2xl font-serif text-white mb-4 transition-all duration-300">
+                      {activeStep === 1 && "Land & Water"}
+                      {activeStep === 2 && "Legal & Permits"}
+                      {activeStep === 3 && "Eco-Construction"}
+                      {activeStep === 4 && "Interior & Feng Shui"}
+                    </h4>
+                    <p className="text-stone-400 text-sm leading-relaxed">
+                      {activeStep === 1 && "Acting as your broker to find the perfect parcel, locating water sources, managing well perforations, and handling complex land registration."}
+                      {activeStep === 2 && "Navigating local regulations seamlessly. We manage all zoning, environmental approvals, and building permits for full legal compliance."}
+                      {activeStep === 3 && "Acting as the general contractor. Designing and constructing sustainable, off-grid homes, pools, solar grids, and modern infrastructure."}
+                      {activeStep === 4 && "Crafting custom wood/metal furniture and applying Feng Shui flow to deliver a fully finished, turn-key space ready to live in."}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Node 1: Top */}
+                <div 
+                  onMouseEnter={() => setActiveStep(1)}
+                  className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 1 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                >
+                  <span className={`font-mono text-lg ${activeStep === 1 ? 'text-white' : 'text-stone-400'}`}>1</span>
+                </div>
+
+                {/* Node 2: Right */}
+                <div 
+                  onMouseEnter={() => setActiveStep(2)}
+                  className={`absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 2 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                >
+                  <span className={`font-mono text-lg ${activeStep === 2 ? 'text-white' : 'text-stone-400'}`}>2</span>
+                </div>
+
+                {/* Node 3: Bottom */}
+                <div 
+                  onMouseEnter={() => setActiveStep(3)}
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 3 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                >
+                  <span className={`font-mono text-lg ${activeStep === 3 ? 'text-white' : 'text-stone-400'}`}>3</span>
+                </div>
+
+                {/* Node 4: Left */}
+                <div 
+                  onMouseEnter={() => setActiveStep(4)}
+                  className={`absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 4 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                >
+                  <span className={`font-mono text-lg ${activeStep === 4 ? 'text-white' : 'text-stone-400'}`}>4</span>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
+ 
+ 
 
       {/* Expertise Section */}
       <section id="expertise" className="py-24 bg-stone-50">
@@ -122,9 +232,12 @@ export default function App() {
           {/* Project 1 */}
           <div className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row mb-12 shadow-sm border border-stone-200/50">
             <div className="lg:w-1/2">
-               {/* TO DO in Cursor: Replace with Australia project image */}
-              <img src="https://placehold.co/1000x800/d6d3d1/57534e?text=Australian+Family+Project" alt="Australian Family Project" className="w-full h-full object-cover min-h-[400px]" />
+              {/* 
+
+              */}
+              <img src="/assets/בית6.jpeg" alt="Australian Family Project" className="w-full h-full object-cover min-h-[400px]" />
             </div>
+     
             <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
               <div className="text-emerald-700 font-bold tracking-wider text-sm mb-2">PRIVATE ECO-ESTATE</div>
               <h3 className="text-3xl font-serif text-stone-900 mb-4">The 11 Hectare Coastal Retreat</h3>
@@ -139,12 +252,13 @@ export default function App() {
               </ul>
             </div>
           </div>
+     
 
           {/* Project 2 */}
           <div className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row-reverse shadow-sm border border-stone-200/50">
             <div className="lg:w-1/2">
               {/* TO DO in Cursor: Replace with Eagle's Nest nature/metal tree image */}
-              <img src="https://placehold.co/1000x800/d6d3d1/57534e?text=Eagle%27s+Nest+Venue" alt="Eagle's Nest" className="w-full h-full object-cover min-h-[400px]" />
+              <img src="/assets/איגלסנסט.jpeg" alt="Eagle's Nest" className="w-full h-full object-cover min-h-[400px]" />
             </div>
             <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
               <div className="text-emerald-700 font-bold tracking-wider text-sm mb-2">REWILDING & CONSERVATION</div>
@@ -236,7 +350,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="bg-stone-950 text-stone-500 py-8 text-center text-sm border-t border-stone-900">
-        <p>&copy; {new Date().getFullYear()} Conscious Development & Connecting the Roots. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Conscious Development &amp; Connecting the Roots. All rights reserved.</p>
       </footer>
     </div>
   );
