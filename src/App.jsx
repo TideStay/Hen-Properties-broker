@@ -369,7 +369,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="bg-stone-950 text-stone-500 py-8 text-center text-sm border-t border-stone-900">
-        <p>&copy; {new Date().getFullYear()} Conscious Development &amp; Connecting the Roots. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} San Juanillo Properties by Hen Azenkot &amp; Connecting the Roots. All rights reserved.</p>
       </footer>
     </div>
   );
