@@ -30,16 +30,17 @@ export default function App() {
  
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="max-w-3xl">
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          
+          {/* Main Text Area */}
+          <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
               From Raw Land to <br className="hidden md:block" />
               <span className="text-emerald-700 italic">Off-Grid Luxury.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
-              Holistic property development and conscious living by Hen Azenkot.  
-              We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
+              Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
             </p>
             <div className="flex flex-wrap gap-4">
               <a href="#projects" className="bg-emerald-800 text-white px-8 py-4 rounded-full font-medium hover:bg-emerald-700 transition flex items-center gap-2">
@@ -47,38 +48,56 @@ export default function App() {
               </a>
             </div>
           </div>
+
+          {/* Premium Asymmetrical Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6 h-[500px] lg:h-[650px] w-full">
+            
+            {/* Main Feature Image (The Pool/Jungle) */}
+            <div className="md:col-span-8 h-full rounded-[2rem] overflow-hidden shadow-2xl relative group">
+              <img 
+                src="/assets/WhatsApp Image 2026-06-24 at 21.46.05 (2).jpeg" 
+                alt="Off-grid luxury pool overlooking the jungle" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md text-white text-sm tracking-widest uppercase px-4 py-2 rounded-full border border-white/20">
+                The Sanctuary
+              </div>
+            </div>
+
+            {/* Side Stacked Images */}
+            <div className="md:col-span-4 flex flex-col gap-4 lg:gap-6 h-full hidden md:flex">
+              
+              {/* Top Side Image (Interior/Kitchen) */}
+              <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
+                <img 
+                  src="/assets/בית2.jpeg" 
+                  alt="Custom wooden interior finish" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
+                />
+                 <div className="absolute bottom-4 left-4 bg-white/10 backdrop-blur-md text-white text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border border-white/20">
+                  Turn-Key Finish
+                </div>
+              </div>
+
+              {/* Bottom Side Image (Aerial View) */}
+              <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
+                <img 
+                  src="/assets/WhatsApp Image 2026-06-24 at 21.46.02 (2).jpeg" 
+                  alt="Aerial view of the eco-estate" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
+                />
+                <div className="absolute bottom-4 left-4 bg-white/10 backdrop-blur-md text-white text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border border-white/20">
+                  Master Planning
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </section>
-   
-      {/* Image Gallery Section - Removed syntax errors */}
-      <div className="mt-16 lg:mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-        {/* Image 1: The core view */}
-        <div className="md:col-span-2 aspect-[16/10] rounded-3xl overflow-hidden shadow-xl">
-          <img
-            src="/assets/WhatsApp Image 2026-06-24 at 21.46.02 (2).jpeg"
-            alt="Circular pool overlooking jungle and ocean view"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Image 2: Interior detail */}
-        <div className="aspect-[16/10] md:aspect-square rounded-3xl overflow-hidden shadow-xl">
-          <img
-            src="/assets/בית2.jpeg"
-            alt="Beautifully crafted off-grid interior"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Image 3: The pathway/terrain */}
-        <div className="md:col-span-3 aspect-[21/9] rounded-3xl overflow-hidden shadow-xl mt-6">
-          <img
-            src="/assets/WhatsApp Image 2026-06-24 at 21.46.05 (2).jpeg"
-            alt="Natural stone pathway leading to the property"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
+ 
   
   
       {/* Philosophy & Experience Section */}
