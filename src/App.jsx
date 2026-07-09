@@ -10,23 +10,28 @@ export default function App() {
       
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="text-2xl font-serif font-bold text-stone-900 tracking-tight leading-tight">
-            San Juanillo<br />
-            <span className="text-emerald-700">Properties</span>
-          </div>
-     
-          <div className="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
-            <a href="#expertise" className="hover:text-emerald-700 transition">Our Expertise</a>
-            <a href="#philosophy" className="hover:text-emerald-700 transition">Philosophy</a>
-            <a href="#projects" className="hover:text-emerald-700 transition">Case Studies</a>
-            <a href="#invest" className="hover:text-emerald-700 transition">Investment</a>
-          </div>
-          <a href="#contact" className="bg-stone-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-stone-800 transition">
-            Start Your Vision
-          </a>
-        </div>
-      </nav>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    
+    {/* המרת הטקסט ללוגו ה-SVG החדש */}
+    <a href="#" className="flex items-center block group">
+      <img 
+        src="/assets/LOGO.svg" 
+        alt="San Juanillo Properties Logo" 
+        className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+      />
+    </a>
+ 
+    <div className="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
+      <a href="#expertise" className="hover:text-emerald-700 transition">Our Expertise</a>
+      <a href="#philosophy" className="hover:text-emerald-700 transition">Philosophy</a>
+      <a href="#projects" className="hover:text-emerald-700 transition">Case Studies</a>
+      <a href="#invest" className="hover:text-emerald-700 transition">Investment</a>
+    </div>
+    <a href="#contact" className="bg-stone-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-stone-800 transition">
+      Start Your Vision
+    </a>
+  </div>
+</nav>
  
 
       {/* Hero Section */}
