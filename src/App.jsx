@@ -76,7 +76,7 @@ export default function App() {
           <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
               From Raw Land to <br className="hidden md:block" />
-              <span className="text-emerald-700 italic">Off-Grid Luxury.</span>
+              <span className="text-amber-500 italic">Off-Grid Luxury.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
@@ -146,12 +146,12 @@ export default function App() {
             
             {/* Left Column: Text Content */}
             <div className="z-10">
-              <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-400 mb-4">20 Years of Mastery</h2>
+              <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-400 mb-4">22 Years of Mastery</h2>
               <h3 className="text-4xl lg:text-5xl font-serif leading-tight mb-6">
                 A turn-key approach to holistic development.
               </h3>
               <p className="text-stone-400 text-lg leading-relaxed mb-6">
-                With a full-process escort for buyers and investors, we provide ultimate peace of mind. Our 20 years of experience means we handle everything: finding and tailoring the right property, designing and accommodating the terrain for construction, and managing all permits.
+                With a full-process escort for buyers and investors, we provide ultimate peace of mind. Our 22 years of experience means we handle everything: finding and tailoring the right property, designing and accommodating the terrain for construction, and managing all permits.
               </p>
               <p className="text-stone-400 text-lg leading-relaxed">
                 From the foundation and landscape architecture to the purchase of custom furniture and electrodomestics—we deliver a fresh, flowing space ready for you to step into, utilizing holistic methods like Feng Shui.
@@ -164,9 +164,9 @@ export default function App() {
               {/* Mobile View: Simple Grid (Hidden on Desktop) */}
               <div className="lg:hidden flex flex-col gap-4 w-full">
                 {[
-                  { id: 1, title: "Land & Water", desc: "Acting as your broker to find the perfect parcel, locating water sources, managing well perforations, and handling complex land registration." },
+                  { id: 1, title: "Land & Water", desc: "Offering development services as finding water, locating water sources, managing well perforations, and handling complex land registration." },
                   { id: 2, title: "Legal & Permits", desc: "Navigating local regulations seamlessly. We manage all zoning, environmental approvals, and building permits for full legal compliance." },
-                  { id: 3, title: "Eco-Construction", desc: "Acting as the general contractor. Designing and constructing sustainable, off-grid homes, pools, solar grids, and modern infrastructure." },
+                  { id: 3, title: "Eco-Construction", desc: "General contractor. Designing and constructing sustainable, off-grid homes, pools, solar grids, and modern infrastructure." },
                   { id: 4, title: "Interior & Feng Shui", desc: "Crafting custom wood/metal furniture and applying Feng Shui flow to deliver a fully finished, turn-key space ready to live in." }
                 ].map((step) => (
                   <div key={step.id} className="bg-stone-800/40 border border-stone-700/50 p-6 rounded-2xl">
@@ -198,9 +198,9 @@ export default function App() {
                       {activeStep === 4 && "Interior & Feng Shui"}
                     </h4>
                     <p className="text-stone-400 text-sm leading-relaxed">
-                      {activeStep === 1 && "Acting as your broker to find the perfect parcel, locating water sources, managing well perforations, and handling complex land registration."}
+                      {activeStep === 1 && "Offering development services as finding water, locating water sources, managing well perforations, and handling complex land registration."}
                       {activeStep === 2 && "Navigating local regulations seamlessly. We manage all zoning, environmental approvals, and building permits for full legal compliance."}
-                      {activeStep === 3 && "Acting as the general contractor. Designing and constructing sustainable, off-grid homes, pools, solar grids, and modern infrastructure."}
+                      {activeStep === 3 && "General contractor. Designing and constructing sustainable, off-grid homes, pools, solar grids, and modern infrastructure."}
                       {activeStep === 4 && "Crafting custom wood/metal furniture and applying Feng Shui flow to deliver a fully finished, turn-key space ready to live in."}
                     </p>
                   </div>
