@@ -426,7 +426,7 @@ export default function App() {
           <p className="text-xl text-emerald-200 mb-10 max-w-2xl mx-auto leading-relaxed">
             From discovering the perfect terrain to stepping into your fully furnished sanctuary. Let's create something sustainable and extraordinary.<br/><br/>
             <span className="text-emerald-300 font-medium text-xl bg-emerald-900/50 px-6 py-3 rounded-full border border-emerald-800/50 inline-block mt-4">
-            sabkesaat@gmail.com
+            sanjuanilloproperties@gmail.com
             </span>
           </p>
           <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
