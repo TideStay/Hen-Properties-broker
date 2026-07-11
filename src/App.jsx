@@ -327,7 +327,7 @@ export default function App() {
               {/* 
 
               */}
-              <img src="/assets/בית6.jpeg" alt="Australian Family Project" className="w-full h-full object-cover min-h-[400px]" />
+              <img src="/assets/בית.jpeg" alt="Terrace view with wooden pillars overlooking the lush jungle and ocean" className="w-full h-full object-cover min-h-[400px]" />
             </div>
      
             <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
