@@ -419,13 +419,13 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-emerald-950 text-emerald-50">
+      <section id="contact" className="py-24 bg-gradient-to-b from-amber-50 via-amber-100/60 to-amber-50 text-stone-900 border-t border-amber-200/70">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Leaf size={48} className="mx-auto text-emerald-400 mb-8" />
-          <h2 className="text-4xl lg:text-5xl font-serif mb-6">Ready to realize your vision?</h2>
-          <p className="text-xl text-emerald-200 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <Leaf size={48} className="mx-auto text-amber-500 mb-8" />
+          <h2 className="text-4xl lg:text-5xl font-serif mb-6 text-stone-900">Ready to realize your vision?</h2>
+          <p className="text-xl text-stone-700 mb-10 max-w-2xl mx-auto leading-relaxed">
             From discovering the perfect terrain to stepping into your fully furnished sanctuary. Let's create something sustainable and extraordinary.<br/><br/>
-            <span className="text-emerald-300 font-medium text-xl bg-emerald-900/50 px-6 py-3 rounded-full border border-emerald-800/50 inline-block mt-4">
+            <span className="text-amber-900 font-medium text-xl bg-amber-200/70 px-6 py-3 rounded-full border border-amber-300 inline-block mt-4">
             sanjuanilloproperties@gmail.com
             </span>
           </p>
@@ -438,7 +438,7 @@ export default function App() {
               placeholder="Your Name"
               required
               disabled={isSubmitting}
-              className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition disabled:opacity-60"
+              className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
             />
             <input
               type="email"
@@ -448,7 +448,7 @@ export default function App() {
               placeholder="Email Address"
               required
               disabled={isSubmitting}
-              className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition disabled:opacity-60"
+              className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
             />
             <textarea
               name="message"
@@ -458,12 +458,12 @@ export default function App() {
               rows="4"
               required
               disabled={isSubmitting}
-              className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition disabled:opacity-60"
+              className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
             />
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-emerald-500 text-emerald-950 font-bold px-5 py-4 rounded-xl hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-amber-500 text-stone-900 font-bold px-5 py-4 rounded-xl hover:bg-amber-400 transition shadow-lg shadow-amber-500/25 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <>
@@ -477,13 +477,13 @@ export default function App() {
           </form>
 
           {submitSuccess && (
-            <div className="max-w-md mx-auto mt-6 p-6 rounded-2xl bg-emerald-500/15 border border-emerald-400/40 shadow-lg shadow-emerald-500/10 backdrop-blur-sm">
+            <div className="max-w-md mx-auto mt-6 p-6 rounded-2xl bg-white/80 border border-amber-400/50 shadow-lg shadow-amber-500/15 backdrop-blur-sm">
               <div className="flex flex-col items-center gap-3 text-center">
-                <div className="w-14 h-14 rounded-full bg-emerald-500/25 flex items-center justify-center ring-4 ring-emerald-400/20">
-                  <CheckCircle2 size={32} className="text-emerald-300" />
+                <div className="w-14 h-14 rounded-full bg-amber-500/20 flex items-center justify-center ring-4 ring-amber-400/25">
+                  <CheckCircle2 size={32} className="text-amber-600" />
                 </div>
-                <h3 className="text-xl font-serif text-white">Message Sent Successfully</h3>
-                <p className="text-emerald-200/90 text-sm leading-relaxed">
+                <h3 className="text-xl font-serif text-stone-900">Message Sent Successfully</h3>
+                <p className="text-stone-700 text-sm leading-relaxed">
                   Thank you for reaching out. We&apos;ve received your inquiry and will get back to you shortly.
                 </p>
               </div>
