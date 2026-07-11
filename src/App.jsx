@@ -82,7 +82,7 @@ export default function App() {
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#projects" className="bg-emerald-800 text-white px-8 py-4 rounded-full font-medium hover:bg-emerald-700 transition flex items-center gap-2">
+              <a href="#projects" className="bg-emerald-600 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 ease-in-out hover:bg-amber-500 hover:text-stone-950 hover:shadow-lg hover:shadow-amber-500/20 flex items-center gap-2">
                 Explore Projects <ArrowRight size={18} />
               </a>
             </div>
@@ -146,7 +146,7 @@ export default function App() {
             
             {/* Left Column: Text Content */}
             <div className="z-10">
-              <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-400 mb-4">22 Years of Mastery</h2>
+              <h2 className="text-sm font-bold tracking-widest uppercase text-amber-400 mb-4">22 Years of Mastery</h2>
               <h3 className="text-4xl lg:text-5xl font-serif leading-tight mb-6">
                 A turn-key approach to holistic development.
               </h3>
@@ -187,7 +187,7 @@ export default function App() {
 
                 {/* The Dynamic Center Content */}
                 <div className="absolute inset-16 bg-stone-900 rounded-full border border-stone-800 shadow-[0_0_50px_rgba(16,185,129,0.05)] flex flex-col items-center justify-center p-12 text-center transition-all duration-500 z-0">
-                  <span className="text-emerald-500/20 text-8xl font-serif absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+                  <span className="text-amber-500/15 text-8xl font-serif absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
                     {activeStep}
                   </span>
                   <div className="relative z-10">
@@ -209,7 +209,7 @@ export default function App() {
                 {/* Node 1: Top */}
                 <div 
                   onMouseEnter={() => setActiveStep(1)}
-                  className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 1 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 1 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 1 ? 'text-white' : 'text-stone-400'}`}>1</span>
                 </div>
@@ -217,7 +217,7 @@ export default function App() {
                 {/* Node 2: Right */}
                 <div 
                   onMouseEnter={() => setActiveStep(2)}
-                  className={`absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 2 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  className={`absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 2 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 2 ? 'text-white' : 'text-stone-400'}`}>2</span>
                 </div>
@@ -225,7 +225,7 @@ export default function App() {
                 {/* Node 3: Bottom */}
                 <div 
                   onMouseEnter={() => setActiveStep(3)}
-                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 3 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 3 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 3 ? 'text-white' : 'text-stone-400'}`}>3</span>
                 </div>
@@ -233,7 +233,7 @@ export default function App() {
                 {/* Node 4: Left */}
                 <div 
                   onMouseEnter={() => setActiveStep(4)}
-                  className={`absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 4 ? 'bg-emerald-600 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(16,185,129,0.4)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  className={`absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 4 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 4 ? 'text-white' : 'text-stone-400'}`}>4</span>
                 </div>
@@ -327,7 +327,7 @@ export default function App() {
               {/* 
 
               */}
-              <img src="/assets/בית.jpeg" alt="Terrace view with wooden pillars overlooking the lush jungle and ocean" className="w-full h-full object-cover min-h-[400px]" />
+              <img src="/assets/HOUSE.jpeg" alt="Terrace view with wooden pillars overlooking the lush jungle and ocean" className="w-full h-full object-cover min-h-[400px]" />
             </div>
      
             <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
@@ -369,15 +369,15 @@ export default function App() {
       </section>
 
       {/* Investment Packages Section */}
-      <section id="invest" className="py-24 bg-stone-900 text-stone-50 relative overflow-hidden">
+      <section id="invest" className="py-24 bg-[#111513] text-stone-50 relative overflow-hidden">
         {/* Subtle background decoration */}
         <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-emerald-900/30 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 -ml-32 -mb-32 w-96 h-96 bg-stone-800/50 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="flex justify-center mb-4"><Sprout size={32} className="text-emerald-400" /></div>
-            <div className="text-emerald-400 font-bold tracking-widest text-sm mb-3 uppercase">Connecting The Roots</div>
+            <div className="flex justify-center mb-4"><Sprout size={32} className="text-amber-400" /></div>
+            <div className="text-amber-400 font-bold tracking-widest text-sm mb-3 uppercase">Connecting The Roots</div>
             <h2 className="text-4xl lg:text-5xl font-serif text-white mb-6">Invest in a Vision. Restore the Earth.</h2>
             <p className="text-stone-400 text-lg">
               Located in Costa Rica's Guanacaste region—one of the world's five Blue Zones. Secure your piece of paradise while actively contributing to biodiversity, nature restoration, and community empowerment.
@@ -386,37 +386,61 @@ export default function App() {
 
           <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             {/* The 1 Hectare Package */}
-            <div className="bg-stone-800/40 border border-stone-700 p-10 rounded-[2.5rem] hover:bg-stone-800/60 transition duration-300 flex flex-col">
-              <h3 className="text-3xl font-serif mb-2">The Private Hectare</h3>
-              <div className="text-emerald-400 text-4xl font-bold mb-6">$275,000 <span className="text-lg font-normal text-stone-400">/ plot</span></div>
-              <p className="text-stone-300 mb-8 leading-relaxed">
+            <div className="bg-stone-900/40 backdrop-blur-sm border border-stone-800/80 p-10 rounded-[2.5rem] hover:bg-stone-900/60 transition duration-300 flex flex-col">
+              <h3 className="text-3xl font-serif text-stone-100 mb-2">The Private Hectare</h3>
+              <div className="text-amber-400/90 text-4xl font-bold mb-6">$275,000 <span className="text-lg font-normal text-stone-400">/ plot</span></div>
+              <p className="text-stone-400 mb-8 leading-relaxed">
                 Secure your own hectare of land on the CTR polygon project. Your investment directly funds sustainable infrastructure and immediate nature restoration.
               </p>
               <ul className="space-y-4 mb-8 flex-grow">
-                <li className="flex items-start gap-3"><ShieldCheck size={24} className="text-emerald-500 shrink-0" /> <span className="text-stone-300"><strong>$50K contribution</strong> to rewild your plot and surrounding land.</span></li>
-                <li className="flex items-start gap-3"><ShieldCheck size={24} className="text-emerald-500 shrink-0" /> <span className="text-stone-300"><strong>$25K covers essential services</strong> (sustainable water & solar energy supply).</span></li>
-                <li className="flex items-start gap-3"><ShieldCheck size={24} className="text-emerald-500 shrink-0" /> <span className="text-stone-300">Development strictly limited to 1 main house and 1 guest house to protect the ecosystem.</span></li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
+                  <span className="text-stone-400"><strong>$50K contribution</strong> to rewild your plot and surrounding land.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
+                  <span className="text-stone-400"><strong>$25K covers essential services</strong> (sustainable water & solar energy supply).</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
+                  <span className="text-stone-400">Development strictly limited to 1 main house and 1 guest house to protect the ecosystem.</span>
+                </li>
               </ul>
             </div>
 
             {/* Collective Ownership */}
-            <div className="bg-emerald-900/30 border border-emerald-800 p-10 rounded-[2.5rem] relative overflow-hidden flex flex-col shadow-2xl shadow-emerald-900/20">
-              <div className="absolute top-0 right-0 bg-emerald-600 text-white text-xs font-bold px-5 py-2 rounded-bl-2xl uppercase tracking-wider">Most Popular</div>
-              <h3 className="text-3xl font-serif mb-2">Collective Ownership</h3>
-              <div className="text-emerald-400 text-4xl font-bold mb-6">10 Hectares <span className="text-lg font-normal text-stone-400">shared estate</span></div>
-              <p className="text-stone-300 mb-8 leading-relaxed">
+            <div className="bg-stone-900/40 backdrop-blur-sm border border-stone-800/80 p-10 rounded-[2.5rem] relative overflow-hidden flex flex-col hover:bg-stone-900/60 transition duration-300">
+              <div className="absolute top-4 right-4 bg-amber-500/10 text-amber-400 text-xs font-semibold tracking-wider px-3 py-1 rounded-full border border-amber-500/20 uppercase">
+                Most Popular
+              </div>
+              <h3 className="text-3xl font-serif text-stone-100 mb-2">Collective Ownership</h3>
+              <div className="text-amber-400/90 text-4xl font-bold mb-6">10 Hectares <span className="text-lg font-normal text-stone-400">shared estate</span></div>
+              <p className="text-stone-400 mb-8 leading-relaxed">
                 A 10-hectare plot sold to a collective of 1-4 owners ($275k per owner). The ultimate balance of private luxury living and massive ecological impact.
               </p>
               <ul className="space-y-4 mb-8 flex-grow">
-                <li className="flex items-start gap-3"><ShieldCheck size={24} className="text-emerald-500 shrink-0" /> <span className="text-stone-300"><strong>4 Hectares</strong> designated for sustainable residential development.</span></li>
-                <li className="flex items-start gap-3"><ShieldCheck size={24} className="text-emerald-500 shrink-0" /> <span className="text-stone-300"><strong>6 Hectares</strong> jointly owned and maintained as a strictly protected private nature reserve.</span></li>
-                <li className="flex items-start gap-3"><ShieldCheck size={24} className="text-emerald-500 shrink-0" /> <span className="text-stone-300">Includes shared greenhouse, dedicated gardener, and ongoing property management.</span></li>
-                <li className="flex items-start gap-3"><ShieldCheck size={24} className="text-emerald-500 shrink-0" /> <span className="text-stone-300">Full assistance with permanent residency in Costa Rica.</span></li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
+                  <span className="text-stone-400"><strong>4 Hectares</strong> designated for sustainable residential development.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
+                  <span className="text-stone-400"><strong>6 Hectares</strong> jointly owned and maintained as a strictly protected private nature reserve.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
+                  <span className="text-stone-400">Includes shared greenhouse, dedicated gardener, and ongoing property management.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
+                  <span className="text-stone-400">Full assistance with permanent residency in Costa Rica.</span>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </section>
+ 
 
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-gradient-to-b from-amber-50 via-amber-100/60 to-amber-50 text-stone-900 border-t border-amber-200/70">
