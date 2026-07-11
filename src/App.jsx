@@ -1,9 +1,43 @@
 import React, { useState } from 'react';
-import { Leaf, Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, ShieldCheck } from 'lucide-react';
+import { Leaf, Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, ShieldCheck, Loader2 } from 'lucide-react';
+
+const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/9v1pwmdj1isn7ee43lv4aac5a5k2n1s7';
 
 export default function App() {
   // BUGFIX: missing state definition for process wheel
   const [activeStep, setActiveStep] = useState(1);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (submitSuccess) setSubmitSuccess(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitSuccess(false);
+
+    try {
+      const response = await fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Submission failed');
+
+      setFormData({ name: '', email: '', message: '' });
+      setSubmitSuccess(true);
+    } catch {
+      // Webhook errors are surfaced via the button returning to its default state
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-emerald-200">
@@ -395,14 +429,66 @@ export default function App() {
             sabkesaat@gmail.com
             </span>
           </p>
-          <form className="max-w-md mx-auto space-y-4">
-            <input type="text" placeholder="Your Name" className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition" />
-            <input type="email" placeholder="Email Address" className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition" />
-            <textarea placeholder="Tell us about your project or vision..." rows="4" className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition"></textarea>
-            <button type="button" className="w-full bg-emerald-500 text-emerald-950 font-bold px-5 py-4 rounded-xl hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">
-              Send Inquiry
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your Name"
+              required
+              disabled={isSubmitting}
+              className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition disabled:opacity-60"
+            />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email Address"
+              required
+              disabled={isSubmitting}
+              className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition disabled:opacity-60"
+            />
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Tell us about your project or vision..."
+              rows="4"
+              required
+              disabled={isSubmitting}
+              className="w-full px-5 py-4 rounded-xl bg-emerald-900/30 border border-emerald-800 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 transition disabled:opacity-60"
+            />
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-emerald-500 text-emerald-950 font-bold px-5 py-4 rounded-xl hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 size={20} className="animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                'Send Inquiry'
+              )}
             </button>
           </form>
+
+          {submitSuccess && (
+            <div className="max-w-md mx-auto mt-6 p-6 rounded-2xl bg-emerald-500/15 border border-emerald-400/40 shadow-lg shadow-emerald-500/10 backdrop-blur-sm">
+              <div className="flex flex-col items-center gap-3 text-center">
+                <div className="w-14 h-14 rounded-full bg-emerald-500/25 flex items-center justify-center ring-4 ring-emerald-400/20">
+                  <CheckCircle2 size={32} className="text-emerald-300" />
+                </div>
+                <h3 className="text-xl font-serif text-white">Message Sent Successfully</h3>
+                <p className="text-emerald-200/90 text-sm leading-relaxed">
+                  Thank you for reaching out. We&apos;ve received your inquiry and will get back to you shortly.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
