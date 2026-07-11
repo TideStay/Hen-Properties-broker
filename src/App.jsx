@@ -332,9 +332,9 @@ export default function App() {
      
             <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
               <div className="text-emerald-700 font-bold tracking-wider text-sm mb-2">PRIVATE ECO-ESTATE</div>
-              <h3 className="text-3xl font-serif text-stone-900 mb-4">The 11 Hectare Coastal Retreat</h3>
+              <h3 className="text-3xl font-serif text-stone-900 mb-4">The 5 Hectare Coastal Retreat</h3>
               <p className="text-stone-600 mb-6 leading-relaxed">
-                An Australian family acquired 11 hectares. We designed a 5-hectare off-grid project featuring 4 ocean-view plots. Within just 3 months, we delivered underground electricity and water infrastructure to each plot, ready to build.
+                 We designed a 5-hectare off-grid project featuring 4 ocean-view plots. Within just 3 months, we delivered underground electricity and water infrastructure to each plot, ready to build.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Shared solar water system + individual systems</li>
