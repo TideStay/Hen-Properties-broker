@@ -75,8 +75,8 @@ export default function App() {
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
-              From Raw Land to <br className="hidden md:block" />
-              <span className="text-amber-500 italic">Off-Grid Luxury.</span>
+            Build from the earth<br className="hidden md:block" />
+              <span className="text-amber-500 italic">Design for comfort.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
