@@ -71,7 +71,7 @@ export default function App() {
             <img 
               src="/assets/LOGO.svg" 
               alt="San Juanillo Properties Logo" 
-              className="h-15 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </a>
           <div className="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
@@ -88,6 +88,7 @@ export default function App() {
           </a>
         </div>
       </nav>
+
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
