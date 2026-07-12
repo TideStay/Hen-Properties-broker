@@ -97,7 +97,7 @@ export default function App() {
           <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
             Where wild Land<br className="hidden md:block" />
-              <span className="text-amber-500 italic">Becomes sustainable Luxury.</span>
+              <span className="text-amber-500 italic"> Becomes sustainable Luxury.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
