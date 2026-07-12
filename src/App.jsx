@@ -96,8 +96,8 @@ export default function App() {
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
-              Build from the earth<br className="hidden md:block" />
-              <span className="text-amber-500 italic">Design for comfort.</span>
+            Where wild Land<br className="hidden md:block" />
+              <span className="text-amber-500 italic">Becomes sustainable Luxury.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
@@ -347,7 +347,7 @@ export default function App() {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Shared solar water system + individual systems</li>
                 <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Shared greenhouse for vegetable growing</li>
-                <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Over 1,000 fruit & hardwood trees planted</li>
+                <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> 700 fruit & hardwood trees planted</li>
                 <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Majority of property kept as private nature reserve</li>
               </ul>
             </div>
@@ -365,7 +365,7 @@ export default function App() {
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> 67 hectares of active rewilding project</li>
-                <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Over 700 fruit & hardwood trees planted for biodiversity</li>
+                <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Over 1000 fruit & hardwood trees planted for biodiversity</li>
                 <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> 52 hectares currently held as a strictly private nature reserve</li>
               </ul>
             </div>
