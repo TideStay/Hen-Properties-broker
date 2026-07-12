@@ -82,10 +82,11 @@ export default function App() {
           </div>
           <a
             href="#contact"
-            className="bg-stone-900 text-white px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-stone-800 transition"
+            className="bg-stone-900 text-white px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-semibold uppercase tracking-wider hover:bg-stone-800 transition whitespace-nowrap"
           >
             Start Your Vision
           </a>
+     
         </div>
       </nav>
 
@@ -96,9 +97,10 @@ export default function App() {
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
-            Where wild Land<br className="hidden md:block" />
-              <span className="text-amber-500 italic"> Becomes sustainable Luxury.</span>
+              Where wild Land <span className="bg-gradient-to-r from-stone-900 to-amber-500 bg-clip-text text-transparent inline-block">becomes</span><br className="hidden md:block" />
+              <span className="text-amber-500 italic">Sustainable Luxury.</span>
             </h1>
+       
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
             </p>
