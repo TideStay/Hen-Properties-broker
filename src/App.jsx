@@ -9,31 +9,35 @@ export default function App() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(""); // Add error feedback
 
   // Handler to update form data
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (submitSuccess) setSubmitSuccess(false);
+    if (submitError) setSubmitError("");
   };
 
   // Handler for form submission with error notifications
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simple frontend validation safeguard (bugfix: prevent blank submissions)
+    // Simple frontend validation safeguard
     if (
       !formData.name.trim() ||
       !formData.email.trim() ||
       !formData.message.trim()
     ) {
       setSubmitSuccess(false);
+      setSubmitError("Please fill in all fields.");
       setIsSubmitting(false);
       return;
     }
 
     setIsSubmitting(true);
     setSubmitSuccess(false);
+    setSubmitError("");
 
     try {
       const response = await fetch(MAKE_WEBHOOK_URL, {
@@ -46,9 +50,12 @@ export default function App() {
 
       setFormData({ name: '', email: '', message: '' });
       setSubmitSuccess(true);
+      setSubmitError("");
     } catch (err) {
-      // Optionally: alert or error message could be set in state and displayed
-      // No user-facing error per original, only disables button for a time
+      setSubmitError(
+        "There was an error sending your message. Please try again or contact us directly."
+      );
+      setSubmitSuccess(false);
     } finally {
       setIsSubmitting(false);
     }
@@ -60,7 +67,7 @@ export default function App() {
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <a href="#" className="flex items-center block group">
+          <a href="/" className="flex items-center block group" aria-label="San Juanillo Properties Home">
             <img 
               src="/assets/LOGO.svg" 
               alt="San Juanillo Properties Logo" 
@@ -102,7 +109,7 @@ export default function App() {
           </div>
           {/* Premium Asymmetrical Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6 h-[500px] lg:h-[650px] w-full">
-            {/* Main Feature Image (The Pool/Jungle) */}
+            {/* Main Feature Image */}
             <div className="md:col-span-8 h-full rounded-[2rem] overflow-hidden shadow-2xl relative group">
               <img 
                 src="/assets/WhatsApp Image 2026-06-24 at 21.46.05 (2).jpeg" 
@@ -116,7 +123,7 @@ export default function App() {
             </div>
             {/* Side Stacked Images */}
             <div className="md:col-span-4 flex flex-col gap-4 lg:gap-6 h-full hidden md:flex">
-              {/* Top Side Image (Interior/Kitchen) */}
+              {/* Top Side Image */}
               <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
                 <img 
                   src="/assets/בית2.jpeg" 
@@ -127,7 +134,7 @@ export default function App() {
                   Turn-Key Finish
                 </div>
               </div>
-              {/* Bottom Side Image (Aerial View) */}
+              {/* Bottom Side Image */}
               <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
                 <img 
                   src="/assets/WhatsApp Image 2026-06-24 at 21.46.02 (2).jpeg" 
@@ -205,28 +212,44 @@ export default function App() {
                 {/* Node 1: Top */}
                 <div 
                   onMouseEnter={() => setActiveStep(1)}
-                  className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 1 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  onFocus={() => setActiveStep(1)}
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Step 1: Land & Water"
+                  className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 outline-none focus:ring-2 focus:ring-amber-500 ${activeStep === 1 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 1 ? 'text-white' : 'text-stone-400'}`}>1</span>
                 </div>
                 {/* Node 2: Right */}
                 <div 
                   onMouseEnter={() => setActiveStep(2)}
-                  className={`absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 2 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  onFocus={() => setActiveStep(2)}
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Step 2: Legal & Permits"
+                  className={`absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 outline-none focus:ring-2 focus:ring-amber-500 ${activeStep === 2 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 2 ? 'text-white' : 'text-stone-400'}`}>2</span>
                 </div>
                 {/* Node 3: Bottom */}
                 <div 
                   onMouseEnter={() => setActiveStep(3)}
-                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 3 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  onFocus={() => setActiveStep(3)}
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Step 3: Eco-Construction"
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 outline-none focus:ring-2 focus:ring-amber-500 ${activeStep === 3 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 3 ? 'text-white' : 'text-stone-400'}`}>3</span>
                 </div>
                 {/* Node 4: Left */}
                 <div 
                   onMouseEnter={() => setActiveStep(4)}
-                  className={`absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 ${activeStep === 4 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
+                  onFocus={() => setActiveStep(4)}
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Step 4: Interior & Feng Shui"
+                  className={`absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-20 outline-none focus:ring-2 focus:ring-amber-500 ${activeStep === 4 ? 'bg-amber-500 border-4 border-stone-900 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.5)]' : 'bg-stone-800 border-2 border-stone-600 hover:border-emerald-500'}`}
                 >
                   <span className={`font-mono text-lg ${activeStep === 4 ? 'text-white' : 'text-stone-400'}`}>4</span>
                 </div>
@@ -239,8 +262,9 @@ export default function App() {
       <section id="expertise" className="py-32 bg-stone-50 relative overflow-hidden">
         {/* Subtle background decoration for depth */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-900/5 rounded-full blur-3xl pointer-events-none"></div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-24">
             <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-700 mb-4">Our Expertise</h2>
             <h3 className="text-4xl lg:text-5xl font-serif text-stone-900 mb-6">End-to-End Solutions</h3>
             <div className="w-16 h-px bg-emerald-700/30 mx-auto mb-6"></div>
@@ -248,44 +272,61 @@ export default function App() {
               Managing the full spectrum of conscious residential development, both on-grid and off-grid.
             </p>
           </div>
-          {/* Staggered Grid Layout */}
-          <div className="grid md:grid-cols-3 gap-8 items-start">
+          
+          {/* Pyramid Grid Container with Fixed Absolute Connector Path */}
+          <div className="relative grid md:grid-cols-3 gap-8 items-start">
+            
+            {/* Elegant Geometric Dashed Triangle - Fixed Height Container to Prevent Warping */}
+            <div className="absolute top-0 left-0 w-full h-40 hidden md:block pointer-events-none z-0">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path 
+                  d="M 16.66 72 L 50 28 L 83.33 72" 
+                  fill="none" 
+                  stroke="#d6d3d1" 
+                  strokeWidth="0.5" 
+                  strokeDasharray="2 3" 
+                  className="stroke-stone-300"
+                />
+              </svg>
+            </div>
+            
             {/* Card 1 - Land & Water */}
-            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#6A8A94]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#6A8A94]/5 hover:-translate-y-2 mt-0 md:mt-0 group-hover:border-stone-300/80">
-              {/* New: Fresh Sky icon colors */}
-              <div className="w-16 h-16 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center mb-8 transition-all duration-500 border border-[#E8E2D9] group-hover:bg-sky-100 group-hover:border-[#DED6C8] group-hover:text-sky-700">
-                <Droplets size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
+            <div className="group relative bg-white/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200/80 hover:bg-white hover:border-stone-300 transition-all duration-500 hover:shadow-xl hover:shadow-stone-200/40 hover:-translate-y-1.5 md:mt-16 text-center z-10">
+              {/* Icon Wrapper - Solid bg ensures it neatly masks the line behind it */}
+              <div className="w-16 h-16 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center mb-8 mx-auto transition-all duration-500 border border-sky-100/70 group-hover:bg-sky-100 group-hover:text-sky-700 relative z-10 shadow-sm bg-white">
+                <Droplets size={26} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-              <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Land & Water Infrastructure</h4>
+              <h4 className="text-2xl font-serif text-stone-900 mb-4">Land & Water Infrastructure</h4>
               <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
                 Acting as your property broker. Finding water, managing well perforations, and navigating complex permits and registration processes seamlessly.
               </p>
             </div>
-            {/* Card 2 - Solar - Staggered slightly down */}
-            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#C49B55]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#C49B55]/5 hover:-translate-y-2 mt-0 md:mt-12 group-hover:border-stone-300/80">
-              {/* New: Warm Amber icon colors */}
-              <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center mb-8 transition-all duration-500 border border-[#F2EBD1] group-hover:bg-amber-100 group-hover:border-[#E8DAB9] group-hover:text-amber-600">
-                <Sun size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
+            
+            {/* Card 2 - Solar (The Elevated Peak) */}
+            <div className="group relative bg-white/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200/80 hover:bg-white hover:border-stone-300 transition-all duration-500 hover:shadow-xl hover:shadow-stone-200/40 hover:-translate-y-1.5 md:mt-0 text-center z-10">
+              {/* Icon Wrapper */}
+              <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center mb-8 mx-auto transition-all duration-500 border border-amber-100/70 group-hover:bg-amber-100 group-hover:text-amber-600 relative z-10 shadow-sm bg-white">
+                <Sun size={26} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-              <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Off-Grid & Solar Systems</h4>
+              <h4 className="text-2xl font-serif text-stone-900 mb-4">Off-Grid & Solar Systems</h4>
               <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
                 Design and installment of solar pumps for water systems and underground electricity, creating fully independent, sustainable properties.
               </p>
             </div>
+            
             {/* Card 3 - Build & Furnish */}
-            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#857061]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#857061]/5 hover:-translate-y-2 mt-0 md:mt-0 group-hover:border-stone-300/80">
-              {/* New: Fresh Emerald icon colors */}
-              <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-8 transition-all duration-500 border border-[#DCDCDC] group-hover:bg-emerald-100 group-hover:border-[#CFCFCF] group-hover:text-emerald-700">
-                <Home size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
+            <div className="group relative bg-white/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200/80 hover:bg-white hover:border-stone-300 transition-all duration-500 hover:shadow-xl hover:shadow-stone-200/40 hover:-translate-y-1.5 md:mt-16 text-center z-10">
+              {/* Icon Wrapper */}
+              <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-8 mx-auto transition-all duration-500 border border-emerald-100/70 group-hover:bg-emerald-100 group-hover:text-emerald-700 relative z-10 shadow-sm bg-white">
+                <Home size={26} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-              <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Design, Build & Furnish</h4>
+              <h4 className="text-2xl font-serif text-stone-900 mb-4">Design, Build & Furnish</h4>
               <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
                 Acting as the general contractor. Designing homes, restaurants, pools, and studios. Crafting custom wood and metal furniture for a Turn-Key finish.
               </p>
             </div>
           </div>
         </div>
-   
       </section>
       {/* Case Studies Section */}
       <section id="projects" className="py-24 bg-stone-100">
@@ -409,7 +450,7 @@ export default function App() {
               sanjuanilloproperties@gmail.com
             </span>
           </p>
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4" autoComplete="off">
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4" autoComplete="off" noValidate>
             <input
               type="text"
               name="name"
@@ -420,6 +461,7 @@ export default function App() {
               disabled={isSubmitting}
               autoComplete="off"
               className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
+              aria-label="Your Name"
             />
             <input
               type="email"
@@ -431,17 +473,19 @@ export default function App() {
               disabled={isSubmitting}
               autoComplete="off"
               className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
+              aria-label="Email Address"
             />
             <textarea
               name="message"
               value={formData.message}
               onChange={handleChange}
               placeholder="Tell us about your project or vision..."
-              rows="4"
+              rows={4}
               required
               disabled={isSubmitting}
               autoComplete="off"
               className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
+              aria-label="Message"
             />
             <button
               type="submit"
@@ -458,6 +502,14 @@ export default function App() {
               )}
             </button>
           </form>
+          {submitError && (
+            <div className="max-w-md mx-auto mt-6 p-4 rounded-xl bg-red-100 border border-red-300 text-red-800 shadow">
+              <div className="flex items-center gap-2">
+                <svg width="20" height="20" fill="none"><circle cx="10" cy="10" r="9" stroke="#DC2626" strokeWidth="2"/><path stroke="#DC2626" strokeWidth="2" d="M10 5v5"/><circle cx="10" cy="14.25" r="1" fill="#DC2626"/></svg>
+                <span>{submitError}</span>
+              </div>
+            </div>
+          )}
           {submitSuccess && (
             <div className="max-w-md mx-auto mt-6 p-6 rounded-2xl bg-white/80 border border-amber-400/50 shadow-lg shadow-amber-500/15 backdrop-blur-sm">
               <div className="flex flex-col items-center gap-3 text-center">
