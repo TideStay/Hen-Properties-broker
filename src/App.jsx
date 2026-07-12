@@ -251,9 +251,9 @@ export default function App() {
           {/* Staggered Grid Layout */}
           <div className="grid md:grid-cols-3 gap-8 items-start">
             {/* Card 1 - Land & Water */}
-            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#6A8A94]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#6A8A94]/5 hover:-translate-y-2 mt-0 md:mt-0">
-              {/* Earth & Ocean Colors: Sand background + Muted Ocean Blue icon */}
-              <div className="w-16 h-16 rounded-full bg-[#F3EFEA] text-[#6A8A94] flex items-center justify-center mb-8 transition-all duration-500 border border-[#E8E2D9] group-hover:bg-[#EAE4DB] group-hover:border-[#DED6C8] group-hover:text-[#52707A]">
+            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#6A8A94]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#6A8A94]/5 hover:-translate-y-2 mt-0 md:mt-0 group-hover:border-stone-300/80">
+              {/* New: Fresh Sky icon colors */}
+              <div className="w-16 h-16 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center mb-8 transition-all duration-500 border border-[#E8E2D9] group-hover:bg-sky-100 group-hover:border-[#DED6C8] group-hover:text-sky-700">
                 <Droplets size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
               <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Land & Water Infrastructure</h4>
@@ -262,9 +262,9 @@ export default function App() {
               </p>
             </div>
             {/* Card 2 - Solar - Staggered slightly down */}
-            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#C49B55]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#C49B55]/5 hover:-translate-y-2 mt-0 md:mt-12">
-              {/* Solar Colors: Soft Sun background + Muted Gold icon */}
-              <div className="w-16 h-16 rounded-full bg-[#FCF7E8] text-[#C49B55] flex items-center justify-center mb-8 transition-all duration-500 border border-[#F2EBD1] group-hover:bg-[#F5ECD5] group-hover:border-[#E8DAB9] group-hover:text-[#A88344]">
+            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#C49B55]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#C49B55]/5 hover:-translate-y-2 mt-0 md:mt-12 group-hover:border-stone-300/80">
+              {/* New: Warm Amber icon colors */}
+              <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center mb-8 transition-all duration-500 border border-[#F2EBD1] group-hover:bg-amber-100 group-hover:border-[#E8DAB9] group-hover:text-amber-600">
                 <Sun size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
               <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Off-Grid & Solar Systems</h4>
@@ -273,9 +273,9 @@ export default function App() {
               </p>
             </div>
             {/* Card 3 - Build & Furnish */}
-            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#857061]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#857061]/5 hover:-translate-y-2 mt-0 md:mt-0">
-              {/* Architecture Colors: Concrete background + Walnut Wood icon */}
-              <div className="w-16 h-16 rounded-full bg-[#EAEAEA] text-[#857061] flex items-center justify-center mb-8 transition-all duration-500 border border-[#DCDCDC] group-hover:bg-[#DCDCDC] group-hover:border-[#CFCFCF] group-hover:text-[#6B5A4D]">
+            <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#857061]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#857061]/5 hover:-translate-y-2 mt-0 md:mt-0 group-hover:border-stone-300/80">
+              {/* New: Fresh Emerald icon colors */}
+              <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-8 transition-all duration-500 border border-[#DCDCDC] group-hover:bg-emerald-100 group-hover:border-[#CFCFCF] group-hover:text-emerald-700">
                 <Home size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
               <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Design, Build & Furnish</h4>
@@ -285,6 +285,7 @@ export default function App() {
             </div>
           </div>
         </div>
+   
       </section>
       {/* Case Studies Section */}
       <section id="projects" className="py-24 bg-stone-100">
