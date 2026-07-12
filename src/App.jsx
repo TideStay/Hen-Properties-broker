@@ -96,10 +96,14 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
-            <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
-              Where wild Land <span className="bg-gradient-to-r from-stone-900 to-amber-500 bg-clip-text text-transparent inline-block">becomes</span><br className="hidden md:block" />
+            <h1 className="text-[2.4rem] sm:text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.15] mb-6 tracking-tight">
+              Where wild Land <br />
+              <span className="bg-gradient-to-r from-stone-900 to-amber-500 bg-clip-text text-transparent inline-block">
+                becomes
+              </span>{" "}
               <span className="text-amber-500 italic">Sustainable Luxury.</span>
             </h1>
+       
        
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
