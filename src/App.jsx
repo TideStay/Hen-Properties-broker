@@ -4,20 +4,34 @@ import { Leaf, Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, ShieldChec
 const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/9v1pwmdj1isn7ee43lv4aac5a5k2n1s7';
 
 export default function App() {
-  // BUGFIX: missing state definition for process wheel
+  // State definitions (all present and correctly typed)
   const [activeStep, setActiveStep] = useState(1);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Handler to update form data
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (submitSuccess) setSubmitSuccess(false);
   };
 
+  // Handler for form submission with error notifications
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Simple frontend validation safeguard (bugfix: prevent blank submissions)
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    ) {
+      setSubmitSuccess(false);
+      setIsSubmitting(false);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitSuccess(false);
 
@@ -32,50 +46,49 @@ export default function App() {
 
       setFormData({ name: '', email: '', message: '' });
       setSubmitSuccess(true);
-    } catch {
-      // Webhook errors are surfaced via the button returning to its default state
+    } catch (err) {
+      // Optionally: alert or error message could be set in state and displayed
+      // No user-facing error per original, only disables button for a time
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  // --- Main return ---
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-emerald-200">
-      
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-    
-    {/* המרת הטקסט ללוגו ה-SVG החדש */}
-    <a href="#" className="flex items-center block group">
-      <img 
-        src="/assets/LOGO.svg" 
-        alt="San Juanillo Properties Logo" 
-        className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-      />
-    </a>
- 
-    <div className="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
-      <a href="#expertise" className="hover:text-emerald-700 transition">Our Expertise</a>
-      <a href="#philosophy" className="hover:text-emerald-700 transition">Philosophy</a>
-      <a href="#projects" className="hover:text-emerald-700 transition">Case Studies</a>
-      <a href="#invest" className="hover:text-emerald-700 transition">Investment</a>
-    </div>
-    <a href="#contact" className="bg-stone-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-stone-800 transition">
-      Start Your Vision
-    </a>
-  </div>
-</nav>
- 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          <a href="#" className="flex items-center block group">
+            <img 
+              src="/assets/LOGO.svg" 
+              alt="San Juanillo Properties Logo" 
+              className="h-15 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+          </a>
+          <div className="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
+            <a href="#expertise" className="hover:text-emerald-700 transition">Our Expertise</a>
+            <a href="#philosophy" className="hover:text-emerald-700 transition">Philosophy</a>
+            <a href="#projects" className="hover:text-emerald-700 transition">Case Studies</a>
+            <a href="#invest" className="hover:text-emerald-700 transition">Investment</a>
+          </div>
+          <a
+            href="#contact"
+            className="bg-stone-900 text-white px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-stone-800 transition"
+          >
+            Start Your Vision
+          </a>
+        </div>
+      </nav>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.1] mb-6">
-            Build from the earth<br className="hidden md:block" />
+              Build from the earth<br className="hidden md:block" />
               <span className="text-amber-500 italic">Design for comfort.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
@@ -87,10 +100,8 @@ export default function App() {
               </a>
             </div>
           </div>
-
           {/* Premium Asymmetrical Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6 h-[500px] lg:h-[650px] w-full">
-            
             {/* Main Feature Image (The Pool/Jungle) */}
             <div className="md:col-span-8 h-full rounded-[2rem] overflow-hidden shadow-2xl relative group">
               <img 
@@ -103,10 +114,8 @@ export default function App() {
                 The Sanctuary
               </div>
             </div>
-
             {/* Side Stacked Images */}
             <div className="md:col-span-4 flex flex-col gap-4 lg:gap-6 h-full hidden md:flex">
-              
               {/* Top Side Image (Interior/Kitchen) */}
               <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
                 <img 
@@ -114,11 +123,10 @@ export default function App() {
                   alt="Custom wooden interior finish" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
                 />
-                 <div className="absolute bottom-4 left-4 bg-white/10 backdrop-blur-md text-white text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border border-white/20">
+                <div className="absolute bottom-4 left-4 bg-white/10 backdrop-blur-md text-white text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border border-white/20">
                   Turn-Key Finish
                 </div>
               </div>
-
               {/* Bottom Side Image (Aerial View) */}
               <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
                 <img 
@@ -130,20 +138,14 @@ export default function App() {
                   Master Planning
                 </div>
               </div>
-
             </div>
           </div>
-
         </div>
       </section>
- 
-  
-  
       {/* Philosophy & Experience Section */}
       <section id="philosophy" className="py-24 bg-stone-900 text-stone-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            
             {/* Left Column: Text Content */}
             <div className="z-10">
               <h2 className="text-sm font-bold tracking-widest uppercase text-amber-400 mb-4">22 Years of Mastery</h2>
@@ -157,10 +159,8 @@ export default function App() {
                 From the foundation and landscape architecture to the purchase of custom furniture and electrodomestics—we deliver a fresh, flowing space ready for you to step into, utilizing holistic methods like Feng Shui.
               </p>
             </div>
-
             {/* Right Column: The Interactive Process Wheel */}
             <div className="relative flex justify-center items-center min-h-[500px] lg:min-h-[600px]">
-              
               {/* Mobile View: Simple Grid (Hidden on Desktop) */}
               <div className="lg:hidden flex flex-col gap-4 w-full">
                 {[
@@ -170,21 +170,18 @@ export default function App() {
                   { id: 4, title: "Interior & Feng Shui", desc: "Crafting custom wood/metal furniture and applying Feng Shui flow to deliver a fully finished, turn-key space ready to live in." }
                 ].map((step) => (
                   <div key={step.id} className="bg-stone-800/40 border border-stone-700/50 p-6 rounded-2xl">
-                    <div className="text-emerald-400 font-mono text-sm mb-2">Step 0{step.id}</div>
+                    <div className="text-emerald-400 font-mono text-sm mb-2">{`Step 0${step.id}`}</div>
                     <h4 className="text-xl font-serif text-white mb-2">{step.title}</h4>
                     <p className="text-stone-400 text-sm leading-relaxed">{step.desc}</p>
                   </div>
                 ))}
               </div>
-
               {/* Desktop View: Interactive Wheel (Hidden on Mobile) */}
               <div className="hidden lg:flex relative w-[500px] h-[500px] items-center justify-center">
                 {/* The Outer Dashed Ring */}
                 <div className="absolute inset-0 rounded-full border border-dashed border-stone-700 animate-[spin_60s_linear_infinite] pointer-events-none"></div>
-                
                 {/* The Static Inner Ring for visual depth */}
                 <div className="absolute inset-10 rounded-full border border-stone-800/50 pointer-events-none"></div>
-
                 {/* The Dynamic Center Content */}
                 <div className="absolute inset-16 bg-stone-900 rounded-full border border-stone-800 shadow-[0_0_50px_rgba(16,185,129,0.05)] flex flex-col items-center justify-center p-12 text-center transition-all duration-500 z-0">
                   <span className="text-amber-500/15 text-8xl font-serif absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
@@ -205,7 +202,6 @@ export default function App() {
                     </p>
                   </div>
                 </div>
-
                 {/* Node 1: Top */}
                 <div 
                   onMouseEnter={() => setActiveStep(1)}
@@ -213,7 +209,6 @@ export default function App() {
                 >
                   <span className={`font-mono text-lg ${activeStep === 1 ? 'text-white' : 'text-stone-400'}`}>1</span>
                 </div>
-
                 {/* Node 2: Right */}
                 <div 
                   onMouseEnter={() => setActiveStep(2)}
@@ -221,7 +216,6 @@ export default function App() {
                 >
                   <span className={`font-mono text-lg ${activeStep === 2 ? 'text-white' : 'text-stone-400'}`}>2</span>
                 </div>
-
                 {/* Node 3: Bottom */}
                 <div 
                   onMouseEnter={() => setActiveStep(3)}
@@ -229,7 +223,6 @@ export default function App() {
                 >
                   <span className={`font-mono text-lg ${activeStep === 3 ? 'text-white' : 'text-stone-400'}`}>3</span>
                 </div>
-
                 {/* Node 4: Left */}
                 <div 
                   onMouseEnter={() => setActiveStep(4)}
@@ -239,21 +232,13 @@ export default function App() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
- 
- 
-
       {/* Expertise Section */}
-
       <section id="expertise" className="py-32 bg-stone-50 relative overflow-hidden">
-
         {/* Subtle background decoration for depth */}
-
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-900/5 rounded-full blur-3xl pointer-events-none"></div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-700 mb-4">Our Expertise</h2>
@@ -263,78 +248,58 @@ export default function App() {
               Managing the full spectrum of conscious residential development, both on-grid and off-grid.
             </p>
           </div>
-          
           {/* Staggered Grid Layout */}
           <div className="grid md:grid-cols-3 gap-8 items-start">
-            
             {/* Card 1 - Land & Water */}
             <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#6A8A94]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#6A8A94]/5 hover:-translate-y-2 mt-0 md:mt-0">
-
               {/* Earth & Ocean Colors: Sand background + Muted Ocean Blue icon */}
               <div className="w-16 h-16 rounded-full bg-[#F3EFEA] text-[#6A8A94] flex items-center justify-center mb-8 transition-all duration-500 border border-[#E8E2D9] group-hover:bg-[#EAE4DB] group-hover:border-[#DED6C8] group-hover:text-[#52707A]">
                 <Droplets size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-
               <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Land & Water Infrastructure</h4>
               <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
                 Acting as your property broker. Finding water, managing well perforations, and navigating complex permits and registration processes seamlessly.
               </p>
             </div>
-            
             {/* Card 2 - Solar - Staggered slightly down */}
             <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#C49B55]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#C49B55]/5 hover:-translate-y-2 mt-0 md:mt-12">
-
               {/* Solar Colors: Soft Sun background + Muted Gold icon */}
               <div className="w-16 h-16 rounded-full bg-[#FCF7E8] text-[#C49B55] flex items-center justify-center mb-8 transition-all duration-500 border border-[#F2EBD1] group-hover:bg-[#F5ECD5] group-hover:border-[#E8DAB9] group-hover:text-[#A88344]">
                 <Sun size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-
               <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Off-Grid & Solar Systems</h4>
               <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
                 Design and installment of solar pumps for water systems and underground electricity, creating fully independent, sustainable properties.
               </p>
             </div>
-            
             {/* Card 3 - Build & Furnish */}
             <div className="group relative bg-white/60 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200 hover:bg-white hover:border-[#857061]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#857061]/5 hover:-translate-y-2 mt-0 md:mt-0">
-
               {/* Architecture Colors: Concrete background + Walnut Wood icon */}
               <div className="w-16 h-16 rounded-full bg-[#EAEAEA] text-[#857061] flex items-center justify-center mb-8 transition-all duration-500 border border-[#DCDCDC] group-hover:bg-[#DCDCDC] group-hover:border-[#CFCFCF] group-hover:text-[#6B5A4D]">
                 <Home size={28} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
-
               <h4 className="text-2xl font-serif text-stone-900 mb-4 transition-colors duration-500">Design, Build & Furnish</h4>
               <p className="text-stone-500 leading-relaxed text-sm lg:text-base group-hover:text-stone-600 transition-colors duration-500">
                 Acting as the general contractor. Designing homes, restaurants, pools, and studios. Crafting custom wood and metal furniture for a Turn-Key finish.
               </p>
             </div>
-            
           </div>
         </div>
-
       </section>
- 
- 
-
       {/* Case Studies Section */}
       <section id="projects" className="py-24 bg-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-serif text-stone-900 mb-16 text-center">Featured Projects</h2>
-          
           {/* Project 1 */}
           <div className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row mb-12 shadow-sm border border-stone-200/50">
             <div className="lg:w-1/2">
-              {/* 
-
-              */}
               <img src="/assets/HOUSE.jpeg" alt="Terrace view with wooden pillars overlooking the lush jungle and ocean" className="w-full h-full object-cover min-h-[400px]" />
             </div>
-     
             <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
               <div className="text-emerald-700 font-bold tracking-wider text-sm mb-2">PRIVATE ECO-ESTATE</div>
               <h3 className="text-3xl font-serif text-stone-900 mb-4">The 5 Hectare Coastal Retreat</h3>
               <p className="text-stone-600 mb-6 leading-relaxed">
-                 We designed a 5-hectare off-grid project featuring 4 ocean-view plots. Within just 3 months, we delivered underground electricity and water infrastructure to each plot, ready to build.
+                We designed a 5-hectare off-grid project featuring 4 ocean-view plots. Within just 3 months, we delivered underground electricity and water infrastructure to each plot, ready to build.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-stone-700"><CheckCircle2 size={20} className="text-emerald-600 shrink-0" /> Shared solar water system + individual systems</li>
@@ -344,12 +309,9 @@ export default function App() {
               </ul>
             </div>
           </div>
-     
-
           {/* Project 2 */}
           <div className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row-reverse shadow-sm border border-stone-200/50">
             <div className="lg:w-1/2">
-              {/* TO DO in Cursor: Replace with Eagle's Nest nature/metal tree image */}
               <img src="/assets/איגלסנסט.jpeg" alt="Eagle's Nest" className="w-full h-full object-cover min-h-[400px]" />
             </div>
             <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center">
@@ -367,13 +329,10 @@ export default function App() {
           </div>
         </div>
       </section>
-
       {/* Investment Packages Section */}
       <section id="invest" className="py-24 bg-[#111513] text-stone-50 relative overflow-hidden">
-        {/* Subtle background decoration */}
         <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-emerald-900/30 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 -ml-32 -mb-32 w-96 h-96 bg-stone-800/50 rounded-full blur-3xl pointer-events-none"></div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="flex justify-center mb-4"><Sprout size={32} className="text-amber-400" /></div>
@@ -383,7 +342,6 @@ export default function App() {
               Located in Costa Rica's Guanacaste region—one of the world's five Blue Zones. Secure your piece of paradise while actively contributing to biodiversity, nature restoration, and community empowerment.
             </p>
           </div>
-
           <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             {/* The 1 Hectare Package */}
             <div className="bg-stone-900/40 backdrop-blur-sm border border-stone-800/80 p-10 rounded-[2.5rem] hover:bg-stone-900/60 transition duration-300 flex flex-col">
@@ -407,7 +365,6 @@ export default function App() {
                 </li>
               </ul>
             </div>
-
             {/* Collective Ownership */}
             <div className="bg-stone-900/40 backdrop-blur-sm border border-stone-800/80 p-10 rounded-[2.5rem] relative overflow-hidden flex flex-col hover:bg-stone-900/60 transition duration-300">
               <div className="absolute top-4 right-4 bg-amber-500/10 text-amber-400 text-xs font-semibold tracking-wider px-3 py-1 rounded-full border border-amber-500/20 uppercase">
@@ -440,8 +397,6 @@ export default function App() {
           </div>
         </div>
       </section>
- 
-
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-gradient-to-b from-amber-50 via-amber-100/60 to-amber-50 text-stone-900 border-t border-amber-200/70">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -450,10 +405,10 @@ export default function App() {
           <p className="text-xl text-stone-700 mb-10 max-w-2xl mx-auto leading-relaxed">
             From discovering the perfect terrain to stepping into your fully furnished sanctuary. Let's create something sustainable and extraordinary.<br/><br/>
             <span className="text-amber-900 font-medium text-xl bg-amber-200/70 px-6 py-3 rounded-full border border-amber-300 inline-block mt-4">
-            sanjuanilloproperties@gmail.com
+              sanjuanilloproperties@gmail.com
             </span>
           </p>
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4" autoComplete="off">
             <input
               type="text"
               name="name"
@@ -462,6 +417,7 @@ export default function App() {
               placeholder="Your Name"
               required
               disabled={isSubmitting}
+              autoComplete="off"
               className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
             />
             <input
@@ -472,6 +428,7 @@ export default function App() {
               placeholder="Email Address"
               required
               disabled={isSubmitting}
+              autoComplete="off"
               className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
             />
             <textarea
@@ -482,6 +439,7 @@ export default function App() {
               rows="4"
               required
               disabled={isSubmitting}
+              autoComplete="off"
               className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
             />
             <button
@@ -499,7 +457,6 @@ export default function App() {
               )}
             </button>
           </form>
-
           {submitSuccess && (
             <div className="max-w-md mx-auto mt-6 p-6 rounded-2xl bg-white/80 border border-amber-400/50 shadow-lg shadow-amber-500/15 backdrop-blur-sm">
               <div className="flex flex-col items-center gap-3 text-center">
@@ -508,19 +465,17 @@ export default function App() {
                 </div>
                 <h3 className="text-xl font-serif text-stone-900">Message Sent Successfully</h3>
                 <p className="text-stone-700 text-sm leading-relaxed">
-                  Thank you for reaching out. We&apos;ve received your inquiry and will get back to you shortly.
+                  Thank you for reaching out. We've received your inquiry and will get back to you shortly.
                 </p>
               </div>
             </div>
           )}
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-stone-950 text-stone-500 py-8 text-center text-sm border-t border-stone-900">
         <p>&copy; {new Date().getFullYear()} San Juanillo Properties by Hen Azenkot. All rights reserved.</p>
       </footer>
-
       {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/50688889525"
@@ -538,6 +493,5 @@ export default function App() {
         </svg>
       </a>
     </div>
- 
   );
 }
