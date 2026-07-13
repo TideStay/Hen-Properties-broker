@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Droplets,
   Sun,
@@ -9,23 +9,11 @@ import {
   Loader2,
 } from "lucide-react";
 
-// Remove unused ShieldCheck and Leaf imports
+// NOTE: Remove unused ShieldCheck and Leaf imports (already done)
 const MAKE_WEBHOOK_URL =
   "https://hook.eu1.make.com/9v1pwmdj1isn7ee43lv4aac5a5k2n1s7";
 
-// Helper for carousel button to prevent scroll offset overshoot/undershoot
-function scrollCarousel(offset) {
-  const el = document.getElementById("hero-carousel");
-  if (!el) return;
-  // Correct for possible partial scroll and boundaries
-  const scrollWidth = el.scrollWidth;
-  const clientWidth = el.clientWidth;
-  let nextLeft = el.scrollLeft + offset;
-  if (nextLeft < 0) nextLeft = 0;
-  if (nextLeft > scrollWidth - clientWidth)
-    nextLeft = scrollWidth - clientWidth;
-  el.scrollTo({ left: nextLeft, behavior: "smooth" });
-}
+// --- Fixes for Carousel: Use refs to avoid getElementById bugs, prevent overscroll, accessible navigation ---
 
 export default function App() {
   const [activeStep, setActiveStep] = useState(1);
@@ -38,7 +26,23 @@ export default function App() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(""); // For error feedback
 
-  // Fix: Use callback for setFormData to avoid async bugs. Also sanitize name in state set.
+  // Fix: Use ref for carousel
+  const carouselRef = useRef(null);
+
+  // Helper for precise carousel scroll, avoids overshooting boundaries
+  function scrollCarousel(offset) {
+    const el = carouselRef.current;
+    if (!el) return;
+    const scrollWidth = el.scrollWidth;
+    const clientWidth = el.clientWidth;
+    let nextLeft = el.scrollLeft + offset;
+    if (nextLeft < 0) nextLeft = 0;
+    if (nextLeft > scrollWidth - clientWidth)
+      nextLeft = scrollWidth - clientWidth;
+    el.scrollTo({ left: nextLeft, behavior: "smooth" });
+  }
+
+  //--- Form logic: enhanced validation, proper event handling, bug fixes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -48,30 +52,34 @@ export default function App() {
     if (submitError) setSubmitError("");
   };
 
-  // Enhanced frontend validation for email
   function validateEmail(email) {
-    // Simplest viable: must have 1 '@', no whitespace, and at least one '.'
-    return /\S+@\S+\.\S+/.test(email);
+    // Accepts most well-formed emails (not strict RFC, but prevents most typos)
+    // Must not have whitespace, must have @, and at least a dot after @
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  // Fix: Prevent multiple submits, protect state sequence against race conditions. Validate email format and minimize race error.
+  // Enhanced form handler fixes: Async, multi-submit guard, race cond. avoidance, validation
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (isSubmitting) return;
+    if (isSubmitting) return; // Prevent double submit
 
-    // Improved frontend validation
-    if (
-      !formData.name.trim() ||
-      !formData.email.trim() ||
-      !formData.message.trim()
-    ) {
+    // Re-trim all fields just in case
+    const trimmedData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      message: formData.message.trim(),
+    };
+
+    if (!trimmedData.name || !trimmedData.email || !trimmedData.message) {
+      // Only update error if not already there (prevents flicker)
       if (!submitError)
         setSubmitError("Please fill in all fields.");
       setSubmitSuccess(false);
       return;
     }
-    if (!validateEmail(formData.email.trim())) {
+
+    if (!validateEmail(trimmedData.email)) {
       setSubmitError("Please enter a valid email address.");
       setSubmitSuccess(false);
       return;
@@ -85,18 +93,17 @@ export default function App() {
       const response = await fetch(MAKE_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(trimmedData),
       });
 
-      // Some proxies (e.g. Make/Integro) may return ok:true but still error. Check for status 200-299:
+      // Make returns ok:true even on many errors: require status check!
       if (!response.ok) {
-        // Try to extract a reason if possible
         let reason = "";
         try {
           const resp = await response.json();
-          reason = resp.error || resp.message;
+          reason = resp && (resp.error || resp.message);
         } catch {
-          // fallback
+          // fallback: empty
         }
         throw new Error(
           reason || "Submission failed. (Invalid server response.)"
@@ -116,7 +123,6 @@ export default function App() {
     }
   };
 
-  // --- Main return ---
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans selection:bg-emerald-200">
       {/* Navigation */}
@@ -167,8 +173,8 @@ export default function App() {
           </a>
         </div>
       </nav>
-{/* Hero Section */}
-<section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
@@ -188,16 +194,18 @@ export default function App() {
               </a>
             </div>
           </div>
-          
+
           {/* Complete 21-Image Luxury Gallery (3 Featured + 18 Dynamic) */}
           <div className="relative h-[500px] lg:h-[650px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl group/carousel">
-            
+
             {/* Scroll Track Container */}
-            <div 
-              id="hero-carousel" 
+            <div
+              id="hero-carousel"
+              ref={carouselRef}
               className="flex w-full h-full overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              tabIndex={0}
+              aria-label="Project image gallery carousel"
             >
-              
               {/* --- 1. FIRST IMAGE: THE SANCTUARY --- */}
               <div className="w-full h-full shrink-0 snap-start relative group">
                 <img
@@ -255,10 +263,9 @@ export default function App() {
                   </div>
                 );
               })}
-
             </div>
 
-            {/* --- FIXED: Premium Mobile Swipe Indicator (Moved to Top Right) --- */}
+            {/* Mobile Swipe Indicator (remains unchanged) */}
             <div className="md:hidden absolute top-6 right-6 bg-stone-900/40 backdrop-blur-md text-white text-[9px] font-bold tracking-widest uppercase px-3 py-2 rounded-full border border-white/20 z-20 flex items-center gap-1.5 shadow-lg pointer-events-none">
               <span>Swipe to explore</span>
               <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -266,37 +273,41 @@ export default function App() {
               </svg>
             </div>
 
-            {/* Luxury Navigation Arrows (Desktop Only) */}
-            <button 
+            {/* Desktop arrow nav: FIX use scrollCarousel helper to not overshoot; fix a11y: add aria-controls */}
+            <button
               onClick={() => {
-                const el = document.getElementById('hero-carousel');
-                if (el) el.scrollBy({ left: -el.offsetWidth, behavior: 'smooth' });
+                const el = carouselRef.current;
+                if (el) scrollCarousel(-el.offsetWidth);
               }}
               className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-stone-900/20 backdrop-blur-md border border-white/10 text-white items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-white hover:text-stone-900 transition-all duration-300 z-20 shadow-lg"
               aria-label="Previous slide"
+              aria-controls="hero-carousel"
+              tabIndex={0}
+              type="button"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
-            <button 
+            <button
               onClick={() => {
-                const el = document.getElementById('hero-carousel');
-                if (el) el.scrollBy({ left: el.offsetWidth, behavior: 'smooth' });
+                const el = carouselRef.current;
+                if (el) scrollCarousel(el.offsetWidth);
               }}
               className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-stone-900/20 backdrop-blur-md border border-white/10 text-white items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-white hover:text-stone-900 transition-all duration-300 z-20 shadow-lg"
               aria-label="Next slide"
+              aria-controls="hero-carousel"
+              tabIndex={0}
+              type="button"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </button>
-
           </div>
         </div>
       </section>
-
       {/* Philosophy & Experience Section */}
       <section
         id="philosophy"
@@ -396,10 +407,12 @@ export default function App() {
                     </p>
                   </div>
                 </div>
+                {/* Nodes: Make all click and keyboard accessible */}
                 {/* Node 1: Top */}
                 <div
                   onMouseEnter={() => setActiveStep(1)}
                   onFocus={() => setActiveStep(1)}
+                  onClick={() => setActiveStep(1)}
                   tabIndex={0}
                   role="button"
                   aria-label="Step 1: Land & Water"
@@ -421,6 +434,7 @@ export default function App() {
                 <div
                   onMouseEnter={() => setActiveStep(2)}
                   onFocus={() => setActiveStep(2)}
+                  onClick={() => setActiveStep(2)}
                   tabIndex={0}
                   role="button"
                   aria-label="Step 2: Legal & Permits"
@@ -442,6 +456,7 @@ export default function App() {
                 <div
                   onMouseEnter={() => setActiveStep(3)}
                   onFocus={() => setActiveStep(3)}
+                  onClick={() => setActiveStep(3)}
                   tabIndex={0}
                   role="button"
                   aria-label="Step 3: Eco-Construction"
@@ -463,6 +478,7 @@ export default function App() {
                 <div
                   onMouseEnter={() => setActiveStep(4)}
                   onFocus={() => setActiveStep(4)}
+                  onClick={() => setActiveStep(4)}
                   tabIndex={0}
                   role="button"
                   aria-label="Step 4: Interior & Feng Shui"
@@ -485,12 +501,7 @@ export default function App() {
           </div>
         </div>
       </section>
-
-      {/* Expertise, Case Studies, Investment, Contact and Footer: unchanged from original, see above (no structural bugs found) */}
-      {/* -- The rest of your file remains identical, but would repeat for brevity -- */}
-      {/* Copy-paste your original JSX and logic for those sections here, as in the initial code. For compactness, only the bug fixes are made above. */}
-      {/* (You may copy and paste from your supplied file if you wish to reinstate non-bug portions) */}
-
+      {/* --- Rest of content unchanged (defensive copy from original) --- */}
       {/* Expertise Section */}
       <section id="expertise" className="py-32 bg-stone-50 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-900/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -674,7 +685,7 @@ export default function App() {
               <p className="text-stone-600 leading-relaxed text-lg">
                 From discovering the perfect terrain to stepping into your fully furnished sanctuary. Let's create something sustainable and extraordinary.
               </p>
-              <a 
+              <a
                 href="https://www.google.com/maps/search/?api=1&query=San+Juanillo+Properties+Guanacaste+Costa+Rica"
                 target="_blank"
                 rel="noopener noreferrer"
