@@ -168,8 +168,8 @@ export default function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
+   {/* Hero Section */}
+   <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
@@ -178,32 +178,27 @@ export default function App() {
               <span className="bg-gradient-to-r from-stone-900 to-amber-500 bg-clip-text text-transparent inline-block">
                 becomes
               </span>{" "}
-              <span className="text-amber-500 italic">
-                Sustainable Luxury.
-              </span>
+              <span className="text-amber-500 italic">Sustainable Luxury.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
-              Holistic property development and conscious living. We guide
-              buyers and investors from finding the perfect terrain to the
-              final piece of furniture, all in harmony with nature.
+              Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="#projects"
-                className="bg-emerald-600 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 ease-in-out hover:bg-amber-500 hover:text-stone-950 hover:shadow-lg hover:shadow-amber-500/20 flex items-center gap-2"
-              >
+              <a href="#projects" className="bg-emerald-600 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 ease-in-out hover:bg-amber-500 hover:text-stone-950 hover:shadow-lg hover:shadow-amber-500/20 flex items-center gap-2">
                 Explore Projects <ArrowRight size={18} />
               </a>
             </div>
           </div>
-
+          
           {/* Complete 21-Image Luxury Gallery (3 Featured + 18 Dynamic) */}
           <div className="relative h-[500px] lg:h-[650px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl group/carousel">
+            
             {/* Scroll Track Container */}
-            <div
-              id="hero-carousel"
+            <div 
+              id="hero-carousel" 
               className="flex w-full h-full overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
+              
               {/* --- 1. FIRST IMAGE: THE SANCTUARY --- */}
               <div className="w-full h-full shrink-0 snap-start relative group">
                 <img
@@ -250,10 +245,7 @@ export default function App() {
               {[...Array(18)].map((_, index) => {
                 const imageNumber = index + 1;
                 return (
-                  <div
-                    key={`gallery-${imageNumber}`}
-                    className="w-full h-full shrink-0 snap-start relative group"
-                  >
+                  <div key={`gallery-${imageNumber}`} className="w-full h-full shrink-0 snap-start relative group">
                     <img
                       src={`/assets/HERO/jpeg.${imageNumber}.jpeg`}
                       alt={`San Juanillo Property Estate View ${imageNumber}`}
@@ -264,50 +256,44 @@ export default function App() {
                   </div>
                 );
               })}
+
             </div>
-            {/* Luxury Navigation Arrows */}
-            <button
-              onClick={() => scrollCarousel(-document.getElementById("hero-carousel")?.offsetWidth || -1)}
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-stone-900/20 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-white hover:text-stone-900 transition-all duration-300 z-20 shadow-lg"
+
+            {/* --- NEW: Premium Mobile Swipe Indicator --- */}
+            <div className="md:hidden absolute bottom-8 right-8 bg-stone-900/30 backdrop-blur-md text-white text-[9px] font-bold tracking-widest uppercase px-4 py-2.5 rounded-full border border-white/20 z-20 flex items-center gap-2 shadow-lg pointer-events-none">
+              <span>Swipe to explore</span>
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+
+            {/* Luxury Navigation Arrows (Desktop Only) */}
+            <button 
+              onClick={() => {
+                const el = document.getElementById('hero-carousel');
+                if (el) el.scrollBy({ left: -el.offsetWidth, behavior: 'smooth' });
+              }}
+              className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-stone-900/20 backdrop-blur-md border border-white/10 text-white items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-white hover:text-stone-900 transition-all duration-300 z-20 shadow-lg"
               aria-label="Previous slide"
-              type="button"
-              tabIndex={0}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 19l-7-7 7-7"
-                />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-            <button
-              onClick={() => scrollCarousel(document.getElementById("hero-carousel")?.offsetWidth || 1)}
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-stone-900/20 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-white hover:text-stone-900 transition-all duration-300 z-20 shadow-lg"
+
+            <button 
+              onClick={() => {
+                const el = document.getElementById('hero-carousel');
+                if (el) el.scrollBy({ left: el.offsetWidth, behavior: 'smooth' });
+              }}
+              className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-stone-900/20 backdrop-blur-md border border-white/10 text-white items-center justify-center opacity-0 group-hover/carousel:opacity-100 hover:bg-white hover:text-stone-900 transition-all duration-300 z-20 shadow-lg"
               aria-label="Next slide"
-              type="button"
-              tabIndex={0}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </button>
+
           </div>
         </div>
       </section>
