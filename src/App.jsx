@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Leaf, Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, ShieldCheck, Loader2 } from 'lucide-react';
+import { Leaf, Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, Loader2 } from 'lucide-react';
 
+// Remove unused ShieldCheck import
 const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/9v1pwmdj1isn7ee43lv4aac5a5k2n1s7';
 
 export default function App() {
@@ -15,6 +16,8 @@ export default function App() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Reset the success/error state only if needed
     if (submitSuccess) setSubmitSuccess(false);
     if (submitError) setSubmitError("");
   };
@@ -29,9 +32,9 @@ export default function App() {
       !formData.email.trim() ||
       !formData.message.trim()
     ) {
+      setIsSubmitting(false); // Fix: don't set submitting if validation fails
       setSubmitSuccess(false);
       setSubmitError("Please fill in all fields.");
-      setIsSubmitting(false);
       return;
     }
 
@@ -86,10 +89,8 @@ export default function App() {
           >
             Start Your Vision
           </a>
-     
         </div>
       </nav>
-
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden bg-stone-50">
@@ -103,8 +104,6 @@ export default function App() {
               </span>{" "}
               <span className="text-amber-500 italic">Sustainable Luxury.</span>
             </h1>
-       
-       
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
               Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
             </p>
@@ -269,7 +268,6 @@ export default function App() {
       <section id="expertise" className="py-32 bg-stone-50 relative overflow-hidden">
         {/* Subtle background decoration for depth */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-900/5 rounded-full blur-3xl pointer-events-none"></div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-24">
             <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-700 mb-4">Our Expertise</h2>
@@ -279,11 +277,9 @@ export default function App() {
               Managing the full spectrum of conscious residential development, both on-grid and off-grid.
             </p>
           </div>
-          
           {/* Pyramid Grid Container with Fixed Absolute Connector Path */}
           <div className="relative grid md:grid-cols-3 gap-8 items-start">
-            
-            {/* Elegant Geometric Dashed Triangle - Fixed Height Container to Prevent Warping */}
+            {/* Elegant Geometric Dashed Triangle */}
             <div className="absolute top-0 left-0 w-full h-40 hidden md:block pointer-events-none z-0">
               <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <path 
@@ -296,10 +292,8 @@ export default function App() {
                 />
               </svg>
             </div>
-            
             {/* Card 1 - Land & Water */}
             <div className="group relative bg-white/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200/80 hover:bg-white hover:border-stone-300 transition-all duration-500 hover:shadow-xl hover:shadow-stone-200/40 hover:-translate-y-1.5 md:mt-16 text-center z-10">
-              {/* Icon Wrapper - Solid bg ensures it neatly masks the line behind it */}
               <div className="w-16 h-16 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center mb-8 mx-auto transition-all duration-500 border border-sky-100/70 group-hover:bg-sky-100 group-hover:text-sky-700 relative z-10 shadow-sm bg-white">
                 <Droplets size={26} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
@@ -308,10 +302,8 @@ export default function App() {
                 Acting as your property broker. Finding water, managing well perforations, and navigating complex permits and registration processes seamlessly.
               </p>
             </div>
-            
             {/* Card 2 - Solar (The Elevated Peak) */}
             <div className="group relative bg-white/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200/80 hover:bg-white hover:border-stone-300 transition-all duration-500 hover:shadow-xl hover:shadow-stone-200/40 hover:-translate-y-1.5 md:mt-0 text-center z-10">
-              {/* Icon Wrapper */}
               <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center mb-8 mx-auto transition-all duration-500 border border-amber-100/70 group-hover:bg-amber-100 group-hover:text-amber-600 relative z-10 shadow-sm bg-white">
                 <Sun size={26} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
@@ -320,10 +312,8 @@ export default function App() {
                 Design and installment of solar pumps for water systems and underground electricity, creating fully independent, sustainable properties.
               </p>
             </div>
-            
             {/* Card 3 - Build & Furnish */}
             <div className="group relative bg-white/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-stone-200/80 hover:bg-white hover:border-stone-300 transition-all duration-500 hover:shadow-xl hover:shadow-stone-200/40 hover:-translate-y-1.5 md:mt-16 text-center z-10">
-              {/* Icon Wrapper */}
               <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-8 mx-auto transition-all duration-500 border border-emerald-100/70 group-hover:bg-emerald-100 group-hover:text-emerald-700 relative z-10 shadow-sm bg-white">
                 <Home size={26} className="group-hover:scale-110 transition-transform duration-500 stroke-[1.5]" />
               </div>
@@ -379,69 +369,76 @@ export default function App() {
         </div>
       </section>
       {/* Investment Packages Section */}
-      <section id="invest" className="py-24 bg-[#111513] text-stone-50 relative overflow-hidden">
+      <section id="invest" className="py-24 bg-[#0E110F] text-stone-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-emerald-900/30 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 -ml-32 -mb-32 w-96 h-96 bg-stone-800/50 rounded-full blur-3xl pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="flex justify-center mb-4"><Sprout size={32} className="text-amber-400" /></div>
-            <div className="text-amber-400 font-bold tracking-widest text-sm mb-3 uppercase">Connecting The Roots</div>
-            <h2 className="text-4xl lg:text-5xl font-serif text-white mb-6">Invest in a Vision. Restore the Earth.</h2>
+            <div className="flex justify-center mb-4"><Sprout size={32} className="text-amber-400/80" /></div>
+            <div className="text-amber-400/80 font-bold tracking-widest text-sm mb-3 uppercase">Connecting The Roots</div>
+            <h2 className="text-4xl lg:text-5xl font-serif text-stone-200 mb-6">Invest in a Vision. Restore the Earth.</h2>
             <p className="text-stone-400 text-lg">
               Located in Costa Rica's Guanacaste region—one of the world's five Blue Zones. Secure your piece of paradise while actively contributing to biodiversity, nature restoration, and community empowerment.
             </p>
           </div>
-          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-            {/* The 1 Hectare Package */}
-            <div className="bg-stone-900/40 backdrop-blur-sm border border-stone-800/80 p-10 rounded-[2.5rem] hover:bg-stone-900/60 transition duration-300 flex flex-col">
-              <h3 className="text-3xl font-serif text-stone-100 mb-2">The Private Hectare</h3>
-              <div className="text-amber-400/90 text-4xl font-bold mb-6">$275,000 <span className="text-lg font-normal text-stone-400">/ plot</span></div>
-              <p className="text-stone-400 mb-8 leading-relaxed">
-                Secure your own hectare of land on the CTR polygon project. Your investment directly funds sustainable infrastructure and immediate nature restoration.
-              </p>
-              <ul className="space-y-4 mb-8 flex-grow">
-                <li className="flex items-start gap-3">
-                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
-                  <span className="text-stone-400"><strong>$50K contribution</strong> to rewild your plot and surrounding land.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
-                  <span className="text-stone-400"><strong>$25K covers essential services</strong> (sustainable water & solar energy supply).</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
-                  <span className="text-stone-400">Development strictly limited to 1 main house and 1 guest house to protect the ecosystem.</span>
-                </li>
-              </ul>
+          {/* Editorial Luxury Cards Grid */}
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
+            {/* Card 1 - The Private Hectare */}
+            <div className="group relative bg-stone-900/40 backdrop-blur-sm p-10 lg:p-12 rounded-[2.5rem] border border-stone-800/50 hover:border-stone-700/60 transition-all duration-500 flex flex-col justify-between">
+              <div>
+                <h3 className="text-3xl font-serif text-stone-200 mb-2">The Private Hectare</h3>
+                <div className="text-3xl font-mono text-amber-400/90 font-light mb-6">
+                  $275,000 <span className="text-xs text-stone-400 tracking-wider uppercase font-sans ml-1">/ plot</span>
+                </div>
+                <p className="text-stone-400 text-sm leading-relaxed mb-8">
+                  Secure your own hectare of land on the CTR polygon project. Your investment directly funds sustainable infrastructure and immediate nature restoration.
+                </p>
+              </div>
+              {/* Editorial Spec Sheet Layout (No Bullets, No AI Icons) */}
+              <div className="border-t border-stone-800/60 pt-6 space-y-6 text-left">
+                <div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-amber-400/60 block mb-1.5">Capital Allocation</span>
+                  <p className="text-stone-300 text-sm leading-relaxed">
+                    Includes a <span className="text-white font-medium">$50K direct contribution</span> to rewild your specific plot, alongside <span className="text-white font-medium">$25K</span> dedicated to independent off-grid water and solar infrastructure.
+                  </p>
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-emerald-500/60 block mb-1.5">Ecosystem Guardrails</span>
+                  <p className="text-stone-300 text-sm leading-relaxed">
+                    To guarantee absolute preservation of biodiversity, construction is strictly limited to one main residential estate and one private guest villa.
+                  </p>
+                </div>
+              </div>
             </div>
-            {/* Collective Ownership */}
-            <div className="bg-stone-900/40 backdrop-blur-sm border border-stone-800/80 p-10 rounded-[2.5rem] relative overflow-hidden flex flex-col hover:bg-stone-900/60 transition duration-300">
-              <div className="absolute top-4 right-4 bg-amber-500/10 text-amber-400 text-xs font-semibold tracking-wider px-3 py-1 rounded-full border border-amber-500/20 uppercase">
+            {/* Card 2 - Collective Ownership */}
+            <div className="group relative bg-stone-900/40 backdrop-blur-sm p-10 lg:p-12 rounded-[2.5rem] border border-stone-800/50 hover:border-stone-700/60 transition-all duration-500 flex flex-col justify-between">
+              <div className="absolute top-5 right-6 bg-amber-400/5 text-amber-400/80 text-[9px] font-bold tracking-widest px-3 py-1 rounded-full border border-amber-400/10 uppercase">
                 Most Popular
               </div>
-              <h3 className="text-3xl font-serif text-stone-100 mb-2">Collective Ownership</h3>
-              <div className="text-amber-400/90 text-4xl font-bold mb-6">10 Hectares <span className="text-lg font-normal text-stone-400">shared estate</span></div>
-              <p className="text-stone-400 mb-8 leading-relaxed">
-                A 10-hectare plot sold to a collective of 1-4 owners ($275k per owner). The ultimate balance of private luxury living and massive ecological impact.
-              </p>
-              <ul className="space-y-4 mb-8 flex-grow">
-                <li className="flex items-start gap-3">
-                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
-                  <span className="text-stone-400"><strong>4 Hectares</strong> designated for sustainable residential development.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
-                  <span className="text-stone-400"><strong>6 Hectares</strong> jointly owned and maintained as a strictly protected private nature reserve.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
-                  <span className="text-stone-400">Includes shared greenhouse, dedicated gardener, and ongoing property management.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ShieldCheck size={24} className="text-emerald-500/80 shrink-0" />
-                  <span className="text-stone-400">Full assistance with permanent residency in Costa Rica.</span>
-                </li>
-              </ul>
+              <div>
+                <h3 className="text-3xl font-serif text-stone-200 mb-2">Collective Ownership</h3>
+                <div className="text-3xl font-mono text-amber-400/90 font-light mb-6">
+                  10 Hectares <span className="text-xs text-stone-400 tracking-wider uppercase font-sans ml-1">/ shared estate</span>
+                </div>
+                <p className="text-stone-400 text-sm leading-relaxed mb-8">
+                  A multi-owner master plot tailored for a private syndicate of 1 to 4 partners ($275k per share). The perfect alignment of high-end estate living and deep environmental impact.
+                </p>
+              </div>
+              {/* Editorial Spec Sheet Layout (No Bullets, No AI Icons) */}
+              <div className="border-t border-stone-800/60 pt-6 space-y-6 text-left">
+                <div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-amber-400/60 block mb-1.5">Estate Distribution</span>
+                  <p className="text-stone-300 text-sm leading-relaxed">
+                    The land is intelligently divided: <span className="text-white font-medium">4 Hectares</span> are designated for low-impact luxury residential development, while <span className="text-white font-medium">6 Hectares</span> are legally locked as a private nature reserve.
+                  </p>
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-emerald-500/60 block mb-1.5">Bespoke Privileges</span>
+                  <p className="text-stone-300 text-sm leading-relaxed">
+                    Fully managed residency program including a shared organic greenhouse, dedicated master gardener, asset management, and full legal assistance for permanent residency.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
