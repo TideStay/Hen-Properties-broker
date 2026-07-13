@@ -1,40 +1,42 @@
 import React, { useState } from 'react';
-import { Leaf, Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, Loader2 } from 'lucide-react';
+import { Droplets, Sun, Home, CheckCircle2, ArrowRight, Sprout, Loader2 } from 'lucide-react';
 
-// Remove unused ShieldCheck import
+// Remove unused ShieldCheck and Leaf imports
 const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/9v1pwmdj1isn7ee43lv4aac5a5k2n1s7';
 
 export default function App() {
-  // State definitions (all present and correctly typed)
   const [activeStep, setActiveStep] = useState(1);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState(""); // Add error feedback
+  const [submitError, setSubmitError] = useState(""); // For error feedback
 
-  // Handler to update form data
+  // Fix: Use callback for setFormData to avoid async bugs
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
 
     // Reset the success/error state only if needed
     if (submitSuccess) setSubmitSuccess(false);
     if (submitError) setSubmitError("");
   };
 
-  // Handler for form submission with error notifications
+  // Fix: Prevent multiple submits, protect state sequence against race conditions
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simple frontend validation safeguard
+    // Prevent duplicate submission
+    if (isSubmitting) return;
+
+    // Basic frontend validation
     if (
       !formData.name.trim() ||
       !formData.email.trim() ||
       !formData.message.trim()
     ) {
-      setIsSubmitting(false); // Fix: don't set submitting if validation fails
+      // Don't set submitting if validation fails!
+      if (!submitError) setSubmitError("Please fill in all fields.");
       setSubmitSuccess(false);
-      setSubmitError("Please fill in all fields.");
       return;
     }
 
@@ -71,9 +73,9 @@ export default function App() {
       <nav className="fixed w-full z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <a href="/" className="flex items-center block group" aria-label="San Juanillo Properties Home">
-            <img 
-              src="/assets/LOGO.svg" 
-              alt="San Juanillo Properties Logo" 
+            <img
+              src="/assets/LOGO.svg"
+              alt="San Juanillo Properties Logo"
               className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </a>
@@ -117,9 +119,9 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6 h-[500px] lg:h-[650px] w-full">
             {/* Main Feature Image */}
             <div className="md:col-span-8 h-full rounded-[2rem] overflow-hidden shadow-2xl relative group">
-              <img 
-                src="/assets/WhatsApp Image 2026-06-24 at 21.46.05 (2).jpeg" 
-                alt="Off-grid luxury pool overlooking the jungle" 
+              <img
+                src="/assets/WhatsApp Image 2026-06-24 at 21.46.05 (2).jpeg"
+                alt="Off-grid luxury pool overlooking the jungle"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -131,9 +133,9 @@ export default function App() {
             <div className="md:col-span-4 flex flex-col gap-4 lg:gap-6 h-full hidden md:flex">
               {/* Top Side Image */}
               <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
-                <img 
-                  src="/assets/בית2.jpeg" 
-                  alt="Custom wooden interior finish" 
+                <img
+                  src="/assets/בית2.jpeg"
+                  alt="Custom wooden interior finish"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
                 />
                 <div className="absolute bottom-4 left-4 bg-white/10 backdrop-blur-md text-white text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border border-white/20">
@@ -142,9 +144,9 @@ export default function App() {
               </div>
               {/* Bottom Side Image */}
               <div className="flex-1 rounded-[2rem] overflow-hidden shadow-lg relative group">
-                <img 
-                  src="/assets/WhatsApp Image 2026-06-24 at 21.46.02 (2).jpeg" 
-                  alt="Aerial view of the eco-estate" 
+                <img
+                  src="/assets/WhatsApp Image 2026-06-24 at 21.46.02 (2).jpeg"
+                  alt="Aerial view of the eco-estate"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
                 />
                 <div className="absolute bottom-4 left-4 bg-white/10 backdrop-blur-md text-white text-xs tracking-widest uppercase px-3 py-1.5 rounded-full border border-white/20">
@@ -216,7 +218,7 @@ export default function App() {
                   </div>
                 </div>
                 {/* Node 1: Top */}
-                <div 
+                <div
                   onMouseEnter={() => setActiveStep(1)}
                   onFocus={() => setActiveStep(1)}
                   tabIndex={0}
@@ -227,7 +229,7 @@ export default function App() {
                   <span className={`font-mono text-lg ${activeStep === 1 ? 'text-white' : 'text-stone-400'}`}>1</span>
                 </div>
                 {/* Node 2: Right */}
-                <div 
+                <div
                   onMouseEnter={() => setActiveStep(2)}
                   onFocus={() => setActiveStep(2)}
                   tabIndex={0}
@@ -238,7 +240,7 @@ export default function App() {
                   <span className={`font-mono text-lg ${activeStep === 2 ? 'text-white' : 'text-stone-400'}`}>2</span>
                 </div>
                 {/* Node 3: Bottom */}
-                <div 
+                <div
                   onMouseEnter={() => setActiveStep(3)}
                   onFocus={() => setActiveStep(3)}
                   tabIndex={0}
@@ -249,7 +251,7 @@ export default function App() {
                   <span className={`font-mono text-lg ${activeStep === 3 ? 'text-white' : 'text-stone-400'}`}>3</span>
                 </div>
                 {/* Node 4: Left */}
-                <div 
+                <div
                   onMouseEnter={() => setActiveStep(4)}
                   onFocus={() => setActiveStep(4)}
                   tabIndex={0}
@@ -282,12 +284,12 @@ export default function App() {
             {/* Elegant Geometric Dashed Triangle */}
             <div className="absolute top-0 left-0 w-full h-40 hidden md:block pointer-events-none z-0">
               <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path 
-                  d="M 16.66 72 L 50 28 L 83.33 72" 
-                  fill="none" 
-                  stroke="#d6d3d1" 
-                  strokeWidth="0.5" 
-                  strokeDasharray="2 3" 
+                <path
+                  d="M 16.66 72 L 50 28 L 83.33 72"
+                  fill="none"
+                  stroke="#d6d3d1"
+                  strokeWidth="0.5"
+                  strokeDasharray="2 3"
                   className="stroke-stone-300"
                 />
               </svg>
@@ -443,90 +445,161 @@ export default function App() {
           </div>
         </div>
       </section>
-      {/* Contact Section */}
-      <section id="contact" className="py-24 bg-gradient-to-b from-amber-50 via-amber-100/60 to-amber-50 text-stone-900 border-t border-amber-200/70">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Leaf size={48} className="mx-auto text-amber-500 mb-8" />
-          <h2 className="text-4xl lg:text-5xl font-serif mb-6 text-stone-900">Ready to realize your vision?</h2>
-          <p className="text-xl text-stone-700 mb-10 max-w-2xl mx-auto leading-relaxed">
-            From discovering the perfect terrain to stepping into your fully furnished sanctuary. Let's create something sustainable and extraordinary.<br/><br/>
-            <span className="text-amber-900 font-medium text-xl bg-amber-200/70 px-6 py-3 rounded-full border border-amber-300 inline-block mt-4">
-              sanjuanilloproperties@gmail.com
-            </span>
-          </p>
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4" autoComplete="off" noValidate>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Your Name"
-              required
-              disabled={isSubmitting}
-              autoComplete="off"
-              className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
-              aria-label="Your Name"
-            />
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email Address"
-              required
-              disabled={isSubmitting}
-              autoComplete="off"
-              className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
-              aria-label="Email Address"
-            />
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Tell us about your project or vision..."
-              rows={4}
-              required
-              disabled={isSubmitting}
-              autoComplete="off"
-              className="w-full px-5 py-4 rounded-xl bg-white/90 border border-amber-300/70 text-stone-900 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition disabled:opacity-60"
-              aria-label="Message"
-            />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-amber-500 text-stone-900 font-bold px-5 py-4 rounded-xl hover:bg-amber-400 transition shadow-lg shadow-amber-500/25 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 size={20} className="animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                'Send Inquiry'
-              )}
-            </button>
-          </form>
-          {submitError && (
-            <div className="max-w-md mx-auto mt-6 p-4 rounded-xl bg-red-100 border border-red-300 text-red-800 shadow">
-              <div className="flex items-center gap-2">
-                <svg width="20" height="20" fill="none"><circle cx="10" cy="10" r="9" stroke="#DC2626" strokeWidth="2"/><path stroke="#DC2626" strokeWidth="2" d="M10 5v5"/><circle cx="10" cy="14.25" r="1" fill="#DC2626"/></svg>
-                <span>{submitError}</span>
+     {/* Contact Section */}
+     <section id="contact" className="py-32 bg-gradient-to-b from-amber-50/40 via-stone-50 to-amber-50/30 relative overflow-hidden border-t border-amber-200/50">
+        {/* Soft elegant amber glow in the background */}
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[400px] bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+
+            {/* Left Column: Brand Statement & Google Maps Trust Anchor */}
+            <div className="lg:col-span-5 space-y-8">
+              <div>
+                <span className="text-sm font-bold tracking-widest uppercase text-amber-600 block mb-4">Begin Your Journey</span>
+                <h2 className="text-4xl lg:text-5xl font-serif text-stone-900 leading-tight">
+                  Ready to realize your vision?
+                </h2>
               </div>
-            </div>
-          )}
-          {submitSuccess && (
-            <div className="max-w-md mx-auto mt-6 p-6 rounded-2xl bg-white/80 border border-amber-400/50 shadow-lg shadow-amber-500/15 backdrop-blur-sm">
-              <div className="flex flex-col items-center gap-3 text-center">
-                <div className="w-14 h-14 rounded-full bg-amber-500/20 flex items-center justify-center ring-4 ring-amber-400/25">
-                  <CheckCircle2 size={32} className="text-amber-600" />
+              <p className="text-stone-600 leading-relaxed text-lg">
+                From discovering the perfect terrain to stepping into your fully furnished sanctuary. Let's create something sustainable and extraordinary.
+              </p>
+
+              {/* Google Maps Premium Trust Badge - Now a Fully Interactive Button */}
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=San+Juanillo+Properties+Guanacaste+Costa+Rica"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-4 bg-white/80 backdrop-blur-sm border border-amber-200/60 rounded-2xl p-4 shadow-sm shadow-amber-900/5 hover:border-amber-400 hover:shadow-md hover:bg-white transition-all duration-300 group/maps cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center border border-stone-100 shrink-0 group-hover/maps:bg-amber-50 group-hover/maps:border-amber-100 transition-colors duration-300">
+                  {/* Custom Minimalist Map Pin Icon */}
+                  <svg className="w-5 h-5 text-amber-500 group-hover/maps:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
                 </div>
-                <h3 className="text-xl font-serif text-stone-900">Message Sent Successfully</h3>
-                <p className="text-stone-700 text-sm leading-relaxed">
-                  Thank you for reaching out. We've received your inquiry and will get back to you shortly.
-                </p>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-stone-900 font-mono font-bold text-sm leading-none">5.0</span>
+                    <div className="flex text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                  <span className="text-[11px] text-stone-500 font-medium tracking-wide block mt-1 group-hover/maps:text-amber-600 transition-colors duration-300">Verified on Google Maps (8 Reviews) →</span>
+                </div>
+              </a>
+
+              <div className="border-t border-amber-200/40 pt-8 space-y-4">
+                <div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-stone-400 block mb-1">Direct Inquiry</span>
+                  <a href="mailto:sanjuanilloproperties@gmail.com" className="text-stone-900 font-serif text-lg hover:text-amber-600 transition duration-300">
+                    sanjuanilloproperties@gmail.com
+                  </a>
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-stone-400 block mb-1">Project Location</span>
+                  <span className="text-stone-800 text-sm font-medium">Guanacaste, Costa Rica (GMT-6)</span>
+                </div>
               </div>
             </div>
-          )}
+
+            {/* Right Column: Luxury Interactive Form */}
+            <div className="lg:col-span-7 bg-white p-10 lg:p-12 rounded-[2.5rem] border border-amber-200/30 shadow-xl shadow-stone-200/40">
+              <form onSubmit={handleSubmit} className="space-y-8" autoComplete="off" noValidate>
+                {/* Minimalist Inputs with Floating Line Effect */}
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="relative group">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      required
+                      placeholder="Your Name"
+                      autoComplete="off"
+                      aria-label="Your Name"
+                      className="w-full bg-transparent border-b border-stone-200 py-3 text-stone-900 focus:outline-none focus:border-amber-500 transition-colors placeholder-stone-400 text-sm disabled:opacity-60"
+                    />
+                  </div>
+                  <div className="relative group">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      required
+                      placeholder="Email Address"
+                      autoComplete="off"
+                      aria-label="Email Address"
+                      className="w-full bg-transparent border-b border-stone-200 py-3 text-stone-900 focus:outline-none focus:border-amber-500 transition-colors placeholder-stone-400 text-sm disabled:opacity-60"
+                    />
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    disabled={isSubmitting}
+                    required
+                    placeholder="Tell us about your project or vision..."
+                    rows={4}
+                    autoComplete="off"
+                    aria-label="Message"
+                    className="w-full bg-transparent border-b border-stone-200 py-3 text-stone-900 focus:outline-none focus:border-amber-500 transition-colors placeholder-stone-400 text-sm resize-none disabled:opacity-60"
+                  ></textarea>
+                </div>
+                {/* Premium Button with Amber Hover Accent */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full md:w-auto bg-stone-900 text-white px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-amber-500 hover:text-stone-900 transition-all duration-300 shadow-md hover:shadow-lg active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Submit Vision Portfolio'
+                  )}
+                </button>
+              </form>
+
+              {/* Error Handling Message Block */}
+              {submitError && (
+                <div className="mt-6 p-4 rounded-xl bg-red-100 border border-red-300 text-red-800 shadow">
+                  <div className="flex items-center gap-2 text-sm">
+                    <svg width="20" height="20" fill="none"><circle cx="10" cy="10" r="9" stroke="#DC2626" strokeWidth="2"/><path stroke="#DC2626" strokeWidth="2" d="M10 5v5"/><circle cx="10" cy="14.25" r="1" fill="#DC2626"/></svg>
+                    <span>{submitError}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Success Handling Message Block */}
+              {submitSuccess && (
+                <div className="mt-6 p-6 rounded-2xl bg-amber-50/50 border border-amber-200/60 shadow-inner">
+                  <div className="flex flex-col items-center gap-3 text-center">
+                    <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center border border-amber-200">
+                      <CheckCircle2 size={24} className="text-amber-600" />
+                    </div>
+                    <h3 className="text-lg font-serif text-stone-900">Message Sent Successfully</h3>
+                    <p className="text-stone-600 text-xs leading-relaxed max-w-sm">
+                      Thank you for reaching out. We've received your inquiry and will get back to you shortly.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+          </div>
         </div>
       </section>
       {/* Footer */}
