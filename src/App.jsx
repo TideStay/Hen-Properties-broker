@@ -345,10 +345,11 @@ export default function App() {
                 methods like Feng Shui.
               </p>
             </div>
-            {/* Right Column: The Interactive Process Wheel */}
+
+            {/* Right Column: The Interactive Process */}
             <div className="relative flex justify-center items-center min-h-[500px] lg:min-h-[600px]">
-              {/* Mobile View: Simple Grid (Hidden on Desktop) */}
-              <div className="lg:hidden flex flex-col gap-4 w-full">
+              {/* --- NEW: Interactive Mobile Timeline (Hidden on Desktop) --- */}
+              <div className="lg:hidden flex flex-col w-full py-4 mt-8">
                 {[
                   {
                     id: 1,
@@ -370,21 +371,84 @@ export default function App() {
                     title: "Interior & Feng Shui",
                     desc: "Crafting custom wood/metal furniture and applying Feng Shui flow to deliver a fully finished, turn-key space ready to live in.",
                   },
-                ].map((step) => (
+                ].map((step, index) => (
                   <div
                     key={step.id}
-                    className="bg-stone-800/40 border border-stone-700/50 p-6 rounded-2xl"
+                    onClick={() => setActiveStep(step.id)}
+                    className="relative pl-14 pb-8 cursor-pointer group"
                   >
-                    <div className="text-emerald-400 font-mono text-sm mb-2">{`Step 0${step.id}`}</div>
-                    <h4 className="text-xl font-serif text-white mb-2">
-                      {step.title}
-                    </h4>
-                    <p className="text-stone-400 text-sm leading-relaxed">
-                      {step.desc}
-                    </p>
+                    {/* Animated Connecting Line (Escalator effect) - Hidden on last item */}
+                    {index !== 3 && (
+                      <div className="absolute left-[23px] top-10 bottom-[-8px] w-[2px] bg-stone-800/50">
+                        <div
+                          className={`w-full bg-amber-500 transition-all duration-700 ease-in-out shadow-[0_0_8px_rgba(245,158,11,0.5)] ${
+                            activeStep > step.id ? "h-full" : "h-0"
+                          }`}
+                        ></div>
+                      </div>
+                    )}
+
+                    {/* Glowing Number Node */}
+                    <div
+                      className={`absolute left-[8px] top-2 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-500 z-10 ${
+                        activeStep === step.id
+                          ? "bg-amber-500 border-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.5)] scale-110"
+                          : activeStep > step.id
+                          ? "bg-amber-500/80 border-amber-500/80"
+                          : "bg-stone-900 border-stone-700 group-hover:border-stone-500"
+                      }`}
+                    >
+                      <span
+                        className={`font-mono text-xs transition-colors ${
+                          activeStep === step.id || activeStep > step.id
+                            ? "text-stone-900 font-bold"
+                            : "text-stone-500"
+                        }`}
+                      >
+                        {step.id}
+                      </span>
+                    </div>
+
+                    {/* Interactive Card */}
+                    <div
+                      className={`p-6 rounded-2xl transition-all duration-500 border ${
+                        activeStep === step.id
+                          ? "bg-stone-800/90 border-amber-500/50 shadow-lg shadow-amber-900/20 translate-x-1"
+                          : "bg-stone-800/30 border-stone-700/40 group-hover:bg-stone-800/50"
+                      }`}
+                    >
+                      <div
+                        className={`font-mono text-sm mb-2 transition-colors duration-300 ${
+                          activeStep === step.id
+                            ? "text-amber-400"
+                            : "text-emerald-500/60"
+                        }`}
+                      >
+                        {`Step 0${step.id}`}
+                      </div>
+                      <h4
+                        className={`text-xl font-serif mb-2 transition-colors duration-300 ${
+                          activeStep === step.id
+                            ? "text-white"
+                            : "text-stone-300"
+                        }`}
+                      >
+                        {step.title}
+                      </h4>
+                      <p
+                        className={`text-sm leading-relaxed transition-colors duration-300 ${
+                          activeStep === step.id
+                            ? "text-stone-300"
+                            : "text-stone-500"
+                        }`}
+                      >
+                        {step.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
+
               {/* Desktop View: Interactive Wheel (Hidden on Mobile) */}
               <div className="hidden lg:flex relative w-[500px] h-[500px] items-center justify-center">
                 {/* The Outer Dashed Ring */}
@@ -509,6 +573,7 @@ export default function App() {
           </div>
         </div>
       </section>
+ 
       {/* --- Rest of content unchanged (defensive copy from original) --- */}
       {/* Expertise Section */}
       <section id="expertise" className="py-32 bg-stone-50 relative overflow-hidden">
