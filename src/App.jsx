@@ -518,10 +518,15 @@ export default function App() {
             <h2 className="text-sm font-bold tracking-widest uppercase text-emerald-700 mb-4">Our Expertise</h2>
             <h3 className="text-4xl lg:text-5xl font-serif text-stone-900 mb-6">End-to-End Solutions</h3>
             <div className="w-16 h-px bg-emerald-700/30 mx-auto mb-6"></div>
-            <p className="text-stone-600 text-lg leading-relaxed">
+            <p className="text-stone-600 text-lg leading-relaxed mb-6">
               Managing the full spectrum of conscious residential development, both on-grid and off-grid.
             </p>
+            {/* New Brand Slogan */}
+            <p className="text-2xl md:text-3xl font-serif italic text-amber-500 tracking-wide">
+              Rewilding nature, rewilding people.
+            </p>
           </div>
+     
           <div className="relative grid md:grid-cols-3 gap-8 items-start">
             <div className="absolute top-0 left-0 w-full h-40 hidden md:block pointer-events-none z-0">
               <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
