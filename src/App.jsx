@@ -179,7 +179,7 @@ export default function App() {
           {/* Main Text Area */}
           <div className="max-w-3xl mb-12 lg:mb-16">
             <h1 className="text-[2.4rem] sm:text-5xl lg:text-7xl font-serif text-stone-900 leading-[1.15] mb-6 tracking-tight">
-              Where wild Land <br />
+              When wild Land <br />
               <span className="bg-gradient-to-r from-stone-900 to-amber-500 bg-clip-text text-transparent inline-block">
                 becomes
               </span>{" "}
@@ -687,7 +687,7 @@ export default function App() {
               <div>
                 <span className="text-sm font-bold tracking-widest uppercase text-amber-600 block mb-4">Begin Your Journey</span>
                 <h2 className="text-4xl lg:text-5xl font-serif text-stone-900 leading-tight">
-                  Ready to realize your vision?
+                  Are you ready to realize your vision?
                 </h2>
               </div>
               <p className="text-stone-600 leading-relaxed text-lg">
