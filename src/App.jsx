@@ -692,7 +692,7 @@ export default function App() {
               <div>
                 <span className="text-sm font-bold tracking-widest uppercase text-amber-600 block mb-4">Begin Your Journey</span>
                 <h2 className="text-4xl lg:text-5xl font-serif text-stone-900 leading-tight">
-                  Are you ready to realize your vision?
+                  Are you ready to make your vision a reality?
                 </h2>
               </div>
               <p className="text-stone-600 leading-relaxed text-lg">
