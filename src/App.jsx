@@ -217,7 +217,7 @@ export default function App() {
               {/* --- 1. FIRST IMAGE: THE SANCTUARY --- */}
               <div className="w-full h-full shrink-0 snap-start relative group">
                 <img
-                  src="/assets/WhatsApp Image 2026-06-24 at 21.46.05 (2).jpeg"
+                  src="/assets/The Sanctuary.jpeg"
                   alt="The Sanctuary - Off-grid luxury pool overlooking the jungle"
                   className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                   loading="eager"
