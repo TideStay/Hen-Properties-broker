@@ -186,13 +186,21 @@ export default function App() {
               <span className="text-amber-500 italic">Sustainable Luxury.</span>
             </h1>
             <p className="text-lg lg:text-xl text-stone-600 mb-10 leading-relaxed max-w-2xl">
-              Holistic property development and conscious living. We guide buyers and investors from finding the perfect terrain to the final piece of furniture, all in harmony with nature.
+              Holistic property development and conscious living. We guide buyers and investors through finding the perfect terrain to the final piece of furniture, all in harmony with nature.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <a href="#projects" className="bg-emerald-600 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 ease-in-out hover:bg-amber-500 hover:text-stone-950 hover:shadow-lg hover:shadow-amber-500/20 flex items-center gap-2">
                 Explore Projects <ArrowRight size={18} />
               </a>
+              {/* Direct Call Button (US / Non-WhatsApp Clients) */}
+              <a href="tel:+50688889525" className="bg-transparent text-stone-700 px-8 py-4 rounded-full font-medium border border-stone-300 transition-all duration-300 ease-in-out hover:border-stone-900 hover:text-stone-900 flex items-center gap-2 group">
+                <svg className="w-5 h-5 text-amber-500 group-hover:text-stone-900 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                +506 8888 9525
+              </a>
             </div>
+       
           </div>
 
           {/* Complete 21-Image Luxury Gallery (3 Featured + 18 Dynamic) */}
@@ -710,11 +718,20 @@ export default function App() {
                   <span className="text-[11px] text-stone-500 font-medium tracking-wide block mt-1 group-hover/maps:text-amber-600 transition-colors duration-300">Verified on Google Maps (8 Reviews) →</span>
                 </div>
               </a>
-              <div className="border-t border-amber-200/40 pt-8 space-y-4">
+              <div className="border-t border-amber-200/40 pt-8 space-y-4 md:space-y-6">
                 <div>
                   <span className="text-[10px] font-bold tracking-widest uppercase text-stone-400 block mb-1">Direct Inquiry</span>
-                  <a href="mailto:sanjuanilloproperties@gmail.com" className="text-stone-900 font-serif text-lg hover:text-amber-600 transition duration-300">
+                  <a href="mailto:sanjuanilloproperties@gmail.com" className="text-stone-900 font-serif text-lg hover:text-amber-600 transition duration-300 block w-fit">
                     sanjuanilloproperties@gmail.com
+                  </a>
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-stone-400 block mb-1">Direct Line</span>
+                  <a href="tel:+50688889525" className="text-stone-900 font-serif text-lg hover:text-amber-600 transition duration-300 flex items-center gap-2 w-fit">
+                    <svg className="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    +506 8888 9525
                   </a>
                 </div>
                 <div>
@@ -722,6 +739,7 @@ export default function App() {
                   <span className="text-stone-800 text-sm font-medium">Guanacaste, Costa Rica (GMT-6)</span>
                 </div>
               </div>
+         
             </div>
             <div className="lg:col-span-7 bg-white p-10 lg:p-12 rounded-[2.5rem] border border-amber-200/30 shadow-xl shadow-stone-200/40">
               <form onSubmit={handleSubmit} className="space-y-8" autoComplete="off" noValidate>
